@@ -26,6 +26,7 @@
         <activity android:name=".SignActivity" />
         <activity android:name=".CreateActivity" />
         <activity android:name=".AuthnActivity" />
+        <activity android:name=".StoreActivity" />
         <activity android:name=".ResistActivity" />
         <activity android:name=".activity_admin.AdminActivity" />
         <activity android:name=".SecurityActivity" />
