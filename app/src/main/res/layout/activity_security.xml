@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="15dp"
-                android:text="관리자 승인 후 와이파이 연결"
+                android:text="ARP Spoofing 탐지"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -45,6 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt_ListName" />
 
             <Switch
+                android:id="@+id/act_sec_switch_arp_spoofing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
