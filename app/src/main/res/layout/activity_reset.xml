@@ -19,7 +19,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/act_reset_btn_restart"
         android:layout_width="250dp"
         android:layout_height="90dp"
         android:layout_marginStart="80dp"
@@ -41,10 +41,10 @@
         android:text="재시작을 진행합니다."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/act_reset_btn_restart" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/act_reset_btn_reset"
         android:layout_width="250dp"
         android:layout_height="90dp"
         android:layout_marginStart="80dp"
