@@ -18,7 +18,7 @@ class ReviseActivity : AppCompatActivity() {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
-        var ip = "192.168.1.167"  //서버 ip
+        var ip = "192.168.0.254"  //서버 ip
         var port = 9999
         var msg = "0"
     }
@@ -68,7 +68,7 @@ class ReviseActivity : AppCompatActivity() {
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = "${username}% ${pwd}"
+                msg = "changeinfo% ${username}% ${pwd}"
 
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
