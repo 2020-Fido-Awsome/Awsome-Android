@@ -39,21 +39,22 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="18dp"
-                android:text="전송하는 데이터 탈취 및 네트워크 문제 발생 탐지 기능"
+                android:text="공유기를 통해 전송되는 데이터를 탈취하고자 하는 공격을 탐지하는 기능"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 />
 
             <Switch
+                android:id="@+id/act_sec_switch_arp_spoofing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
-
                 android:thumb="@drawable/switch_thumb_off"
                 android:track="@drawable/switch_track_selector"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:checked="true" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -79,7 +80,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="18dp"
-                android:text="네트워크 문제 발생 탐지하여 정상적 접근을 도와주는 기능"
+                android:text="비정상적인 데이터의 접근을 방지하고 정상적 접근을 도와주는 기능"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                  />
@@ -108,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="15dp"
-                android:text="관리자 승인 후 와이파이 연결"
+                android:text="DoS/DDoS 공격 탐지"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -120,7 +121,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="18dp"
-                android:text="네트워크 및 시스템 마비를 탐지하고 정상운영을 도와주는 기능"
+                android:text="네트워크 및 시스템의 마비를 탐지하고 정상운영을 도와주는 기능"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                  />
@@ -160,7 +161,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="18dp"
-                android:text="안전하지 못한 사이트 탐지  및 개인정보 등 탈취 예방 기능"
+                android:text="안전하지 못한 사이트로의 연결로 인한 개인정보 탈취 예방 기능"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                  />
@@ -201,7 +202,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="18dp"
-                android:text="공유기 관리자가 승인한 기기 외의 불법적 접근 방지 기능  "
+                android:text="공유기 관리자가 승인한 기기 외의 불법적 접근 탐지 기능  "
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                  />
