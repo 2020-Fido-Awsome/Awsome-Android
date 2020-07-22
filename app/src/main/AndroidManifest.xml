@@ -12,7 +12,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme" tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".InformationActivity" />
         <activity android:name=".activity_host.HostActivity" />
@@ -22,14 +26,7 @@
         <activity android:name=".SignActivity" />
         <activity android:name=".CreateActivity" />
         <activity android:name=".AuthnActivity" />
-        <activity android:name=".StoreActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+        <activity android:name=".StoreActivity" />
         <activity android:name=".ResistActivity" />
         <activity android:name=".activity_admin.AdminActivity" />
         <activity android:name=".SecurityActivity" />
