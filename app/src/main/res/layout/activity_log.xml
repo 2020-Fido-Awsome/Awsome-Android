@@ -81,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="@+id/btn_switch"
         app:layout_constraintTop_toTopOf="@+id/btn_switch" />
 
-    <androidx.viewpager.widget.ViewPager
+    <com.entersekt.fido2.fragment_log.CustomViewpager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
