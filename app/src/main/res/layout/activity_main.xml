@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="64dp"
-        android:text="길동이네 WIFI"
+        android:text="AWS WIFI"
         android:textColor="#505050"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
