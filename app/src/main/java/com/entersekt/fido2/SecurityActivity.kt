@@ -1,16 +1,11 @@
 package com.entersekt.fido2
 
-import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import kotlinx.android.synthetic.main.activity_security.*
 import java.io.DataInputStream
 import java.io.DataOutputStream
-import java.net.ServerSocket
 import java.net.Socket
-import java.net.SocketException
 
 class SecurityActivity : AppCompatActivity() {
 
@@ -28,6 +23,7 @@ class SecurityActivity : AppCompatActivity() {
         setContentView(R.layout.activity_security)
 
         btn_back.setOnClickListener {
+            Disconnect().start()
             finish()
         }
 
@@ -55,6 +51,16 @@ class SecurityActivity : AppCompatActivity() {
                 socket.close()
             }
 
+        }
+    }
+
+    class Disconnect:Thread(){
+        override fun run() {
+            try{
+                socket.close()
+            }catch(e:Exception){
+
+            }
         }
     }
 

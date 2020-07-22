@@ -23,6 +23,7 @@ class ResetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reset)
 
         btn_back.setOnClickListener {
+            Disconnect().start()
             finish()
         }
 
@@ -51,6 +52,16 @@ class ResetActivity : AppCompatActivity() {
                 SecurityActivity.socket.close()
             }
 
+        }
+    }
+
+    class Disconnect:Thread(){
+        override fun run() {
+            try{
+                socket.close()
+            }catch(e:Exception){
+
+            }
         }
     }
 }
