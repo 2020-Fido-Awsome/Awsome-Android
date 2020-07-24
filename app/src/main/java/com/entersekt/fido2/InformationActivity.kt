@@ -25,11 +25,6 @@ class InformationActivity : AppCompatActivity() {
         var msg = "0"
     }
 
-    var userName = ""
-    var publicIP = ""
-    var privateIP = ""
-    var subnet = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
@@ -89,7 +84,6 @@ class InformationActivity : AppCompatActivity() {
                     mHandler.sendMessage(msg)
                 }
 
-
             }catch(e:Exception){    //연결 실패
                 socket.close()
             }
@@ -101,6 +95,7 @@ class InformationActivity : AppCompatActivity() {
         override fun run() {
             try{
                 socket.close()
+                ThreadDeath()
             }catch(e:Exception){
 
             }

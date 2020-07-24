@@ -59,6 +59,7 @@ class ResetActivity : AppCompatActivity() {
         override fun run() {
             try{
                 socket.close()
+                ThreadDeath()
             }catch(e:Exception){
 
             }

@@ -28,8 +28,6 @@ class ReviseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_revise)
 
-//        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
         btn_back.setOnClickListener {
             Disconnect().start()
             finish()
@@ -82,6 +80,7 @@ class ReviseActivity : AppCompatActivity() {
         override fun run() {
             try{
                 socket.close()
+                ThreadDeath()
             }catch(e:Exception){
 
             }
