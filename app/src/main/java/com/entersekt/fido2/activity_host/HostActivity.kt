@@ -17,7 +17,7 @@ class HostActivity : AppCompatActivity() {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
-        var ip = "172.18.21.22"  //서버 ip
+        var ip = "192.168.0.254"  //서버 ip
         var port = 9999
         var msg = "0"
         var cnt = 0
@@ -65,7 +65,7 @@ class HostActivity : AppCompatActivity() {
                 data = String(dataArr)
                 socket.close()
             }catch(e:Exception){    //연결 실패
-                SecurityActivity.socket.close()
+                socket.close()
             }
 
         }
@@ -84,6 +84,7 @@ class HostActivity : AppCompatActivity() {
 
     fun loadDatas(){
 
+        println("count : ${cnt}")
         println("loadData : ${data}")
 
         for(i in 1..cnt){

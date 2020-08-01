@@ -20,7 +20,7 @@ class InformationActivity : AppCompatActivity() {
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
         var mHandler = Handler()
-        var ip = "192.168.1.167"  //서버 ip
+        var ip = "192.168.0.40"  //서버 ip
         var port = 9999
         var msg = "0"
     }
