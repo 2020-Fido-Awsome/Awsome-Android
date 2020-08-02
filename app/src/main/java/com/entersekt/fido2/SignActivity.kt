@@ -14,7 +14,7 @@ class SignActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign)
 
-        btn_SignUp.setOnClickListener {
+        btn_SignUp.setOnClickListener { //회원가입
             val intent = Intent(this, CreateActivity::class.java)
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -23,7 +23,7 @@ class SignActivity : AppCompatActivity() {
             startActivity(intent)
        }
 
-        btn_SignIn.setOnClickListener {
+        btn_SignIn.setOnClickListener { //로그인
             val intent = Intent(this, AuthnActivity::class.java)
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

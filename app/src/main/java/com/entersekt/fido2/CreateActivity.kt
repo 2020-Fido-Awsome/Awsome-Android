@@ -39,7 +39,6 @@ class CreateActivity : AppCompatActivity() {
 
                 startActivity(intent)
                 finish()
-
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)

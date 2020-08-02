@@ -1,5 +1,6 @@
 package com.entersekt.fido2
 
+import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
@@ -12,6 +13,9 @@ import androidx.core.content.edit
 import com.google.android.gms.fido.Fido
 import com.google.android.gms.fido.fido2.api.common.*
 import kotlinx.android.synthetic.main.activity_resist.*
+import java.io.DataInputStream
+import java.io.DataOutputStream
+import java.net.Socket
 import java.security.SecureRandom
 
 
@@ -22,6 +26,7 @@ class ResistActivity : AppCompatActivity() {
         private const val REQUEST_CODE_SIGN = 2
         private const val KEY_HANDLE_PREF = "key_handle"
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -175,6 +180,9 @@ class ResistActivity : AppCompatActivity() {
                 "$clientDataJson\n\n" +
                 "attestationObjectBase64:\n" +
                 "$attestationObjectBase64\n"
+
+        //회원가입 성공-소켓 통신 호출
+        StoreActivity.StoreConnect(intent.getStringExtra("nick")).start()
 
         resultText.text = registerFido2Result
         Toast.makeText(this, "회원가입 성공했습니다", Toast.LENGTH_LONG).show()
