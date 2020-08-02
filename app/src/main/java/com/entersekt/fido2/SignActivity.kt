@@ -8,7 +8,6 @@ import kotlinx.android.synthetic.main.activity_sign.*
 
 class SignActivity : AppCompatActivity() {
 
-    var lastTimeBackPressed = System.currentTimeMillis()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +33,13 @@ class SignActivity : AppCompatActivity() {
         }
     }
 
+    var lastTimeBackPressed:Long = 0
     override fun onBackPressed() {
-        lastTimeBackPressed = System.currentTimeMillis()
-
-        if (System.currentTimeMillis() - lastTimeBackPressed < 1500) {
+        if (System.currentTimeMillis() - lastTimeBackPressed >= 2000) {
+            lastTimeBackPressed = System.currentTimeMillis()
+            Toast.makeText(this,"버튼을 한번 더 누르면 종료합니다.",Toast.LENGTH_SHORT).show()
+        } else {
             finish()
-            return
         }
-
-        Toast.makeText(this,"버튼을 한번 더 누르면 종료합니다.", Toast.LENGTH_SHORT).show()
     }
 }
