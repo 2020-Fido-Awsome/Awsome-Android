@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_main"
@@ -15,16 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".QrActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".SplashActivity">
-
-        </activity>
+        <activity android:name=".SplashActivity"/>
         <activity android:name=".InformationActivity" />
         <activity android:name=".activity_host.HostActivity" />
         <activity android:name=".ResetActivity" />
@@ -32,12 +24,35 @@
         <activity android:name=".ReviseActivity" />
         <activity android:name=".SignActivity" />
         <activity android:name=".CreateActivity" />
-        <activity android:name=".AuthnActivity" />
+        <activity android:name=".AuthnActivity">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="aws.eazysecure-auth.com" />
+                <data android:scheme="https" />
+            </intent-filter>
+        </activity>
         <activity android:name=".StoreActivity" />
-        <activity android:name=".ResistActivity" />
+        <activity android:name=".ResistActivity" >
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="aws.eazysecure-auth.com" />
+                <data android:scheme="https" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activity_admin.AdminActivity" />
         <activity android:name=".SecurityActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".QrActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -66,7 +66,7 @@ class ResistActivity : AppCompatActivity() {
     private fun registerFido2() {
         // All the option parameters should come from the Relying Party / server
         val options = PublicKeyCredentialCreationOptions.Builder()
-            .setRp(PublicKeyCredentialRpEntity("awsomewifi.firebaseapp.com", "Fido2Demo", null))
+            .setRp(PublicKeyCredentialRpEntity("aws.eazysecure-auth.com", "Fido2Demo", null))
             .setUser(
                 PublicKeyCredentialUserEntity(
 
@@ -105,7 +105,7 @@ class ResistActivity : AppCompatActivity() {
     private fun signFido2() {
         // All the option parameters should come from the Relying Party / server
         val options = PublicKeyCredentialRequestOptions.Builder()
-            .setRpId("awsomewifi.firebaseapp.com")
+            .setRpId("aws.eazysecure-auth.com")
             .setAllowList(
                 listOf(
                     PublicKeyCredentialDescriptor(
@@ -155,6 +155,7 @@ class ResistActivity : AppCompatActivity() {
      */
     private fun handleRegisterResponse(fido2Response: ByteArray) {
         val response = AuthenticatorAttestationResponse.deserializeFromBytes(fido2Response)
+        println(response)
         val keyHandleBase64 = Base64.encodeToString(response.keyHandle, Base64.DEFAULT)
         val clientDataJson = String(response.clientDataJSON, Charsets.UTF_8)
         val attestationObjectBase64 = Base64.encodeToString(response.attestationObject, Base64.DEFAULT)
