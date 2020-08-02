@@ -23,7 +23,7 @@ class SecurityActivity : AppCompatActivity() {
         setContentView(R.layout.activity_security)
 
         btn_back.setOnClickListener {
-            Disconnect().start()
+            SecurityDisconnect().start()
             finish()
         }
 
@@ -54,7 +54,7 @@ class SecurityActivity : AppCompatActivity() {
         }
     }
 
-    class Disconnect:Thread(){
+    class SecurityDisconnect:Thread(){
         override fun run() {
             try{
                 socket.close()

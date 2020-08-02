@@ -35,7 +35,7 @@ class HostActivity : AppCompatActivity() {
         datas.clear()
 
         btn_back.setOnClickListener {
-            Disconnect().start()
+            HostDisconnect().start()
             finish()
         }
 
@@ -43,8 +43,9 @@ class HostActivity : AppCompatActivity() {
         rv_host.adapter = hostAdpater
         rv_host.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false))
         Connect().start()
-
-        loadDatas()
+        if(!data.isNullOrEmpty()){
+            loadDatas()
+        }
     }
 
     //비동기 소켓통신
@@ -58,12 +59,11 @@ class HostActivity : AppCompatActivity() {
                 msg = "list"
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
-                cnt = readSocket.read()
+//                cnt = readSocket.read()
 
                 var dataArr = ByteArray(1024) // 1024만큼 데이터 받기
                 readSocket.read(dataArr) // byte array에 데이터를 씁니다.
                 data = String(dataArr)
-                socket.close()
             }catch(e:Exception){    //연결 실패
                 socket.close()
             }
@@ -71,7 +71,7 @@ class HostActivity : AppCompatActivity() {
         }
     }
 
-    class Disconnect:Thread(){
+    class HostDisconnect:Thread(){
         override fun run() {
             try{
                 socket.close()
@@ -84,11 +84,18 @@ class HostActivity : AppCompatActivity() {
 
     fun loadDatas(){
 
-        println("count : ${cnt}")
         println("loadData : ${data}")
 
-        for(i in 1..cnt){
-            dataArr[i-1] = data.split('/')[i]
+
+        cnt = data.split('/')[0].toInt()
+        data = data.removePrefix(data.split('/')[0])
+        println("loadData2 : ${data}")
+
+        println("count : ${cnt}")
+
+        for(i in 0..cnt-1){
+            dataArr[i] = data.split('/')[i+1]
+            println(dataArr[i])
         }
 
         for( i in 0..cnt-1){

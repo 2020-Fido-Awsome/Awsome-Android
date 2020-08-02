@@ -18,7 +18,7 @@ class ActiveFragment : Fragment() {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
-        var ip = "172.20.10.2"  //서버 ip
+        var ip = "192.168.0.254"  //서버 ip
         var port = 9999
         var msg = "0"
         var cnt = 0
@@ -42,13 +42,11 @@ class ActiveFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         activeAdapter = ActiveAdapter(view.context)
-        datas.clear()
-        println("activefragment")
+        println("activefragmentOnViewVreated")
 
         rv_active.adapter = activeAdapter
         rv_active.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        Connect().start()
-        loadDatas()
+        onStart()
     }
 
     //비동기 소켓통신
@@ -60,7 +58,7 @@ class ActiveFragment : Fragment() {
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = "activity_log1"
+                msg = "active_log"
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
                 cnt = readSocket.read()
@@ -80,7 +78,7 @@ class ActiveFragment : Fragment() {
         override fun run() {
             try{
                 socket.close()
-                ThreadDeath()
+//                ThreadDeath()
             }catch(e:Exception){
 
             }
@@ -119,9 +117,11 @@ class ActiveFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        datas.clear()
 
-        println("activefragment")
-
+        println("activefragmentOnStart")
+        Connect().start()
+        loadDatas()
     }
 
 }

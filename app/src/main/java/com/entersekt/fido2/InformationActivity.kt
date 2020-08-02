@@ -20,7 +20,7 @@ class InformationActivity : AppCompatActivity() {
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
         var mHandler = Handler()
-        var ip = "192.168.0.40"  //서버 ip
+        var ip = "192.168.0.254"  //서버 ip
         var port = 9999
         var msg = "0"
     }
@@ -33,12 +33,12 @@ class InformationActivity : AppCompatActivity() {
         btn_editpw.setOnClickListener {
             val intent = Intent(this, ReviseActivity::class.java)
             startActivity(intent)
-            Disconnect().start()
+            InformationDisconnect().start()
             finish()
         }
 
         btn_back.setOnClickListener {
-            Disconnect().start()
+            InformationDisconnect().start()
             finish()
         }
 
@@ -91,7 +91,7 @@ class InformationActivity : AppCompatActivity() {
         }
     }
 
-    class Disconnect:Thread(){
+    class InformationDisconnect:Thread(){
         override fun run() {
             try{
                 socket.close()

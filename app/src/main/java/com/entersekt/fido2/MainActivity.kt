@@ -41,15 +41,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    var lastTimeBackPressed = System.currentTimeMillis()
+    var lastTimeBackPressed:Long = 0
     override fun onBackPressed() {
-
-        if (System.currentTimeMillis() - lastTimeBackPressed < 1500) {
-            return
+        if (System.currentTimeMillis() - lastTimeBackPressed >= 2000) {
+            lastTimeBackPressed = System.currentTimeMillis()
+            Toast.makeText(this,"버튼을 한번 더 누르면 종료합니다.",Toast.LENGTH_SHORT).show()
+        } else {
+            finish()
         }
-
-        lastTimeBackPressed = System.currentTimeMillis()
-
-        Toast.makeText(this,"버튼을 한번 더 누르면 종료합니다.",Toast.LENGTH_SHORT).show()
     }
 }

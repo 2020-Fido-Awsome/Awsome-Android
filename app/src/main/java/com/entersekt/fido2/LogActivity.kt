@@ -6,7 +6,6 @@ import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager.widget.ViewPager
 import com.entersekt.fido2.fragment_log.LogAdapter
 import com.entersekt.fido2.fragment_log.active.ActiveFragment
@@ -26,7 +25,7 @@ class LogActivity : AppCompatActivity() {
         setContentView(R.layout.activity_log)
 
         btn_back.setOnClickListener {
-            ActiveFragment.Disconnect().start()
+//            ActiveFragment.Disconnect().start()
             finish()
         }
 
@@ -47,26 +46,12 @@ class LogActivity : AppCompatActivity() {
 
             override fun onPageSelected(position: Int) { //0, 1
                 Toast.makeText(this@LogActivity, position.toString(), Toast.LENGTH_SHORT).show()
-                // Reload current fragment
-
-                // Reload current fragment
-                var frg: Fragment? = null
-                frg = supportFragmentManager.findFragmentById(0)
-                val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                if (frg != null) {
-                    ft.detach(frg)
-                }
-                if (frg !=  null) {
-                    ft.attach(frg)
-                }
-                ft.commit()
-                if(position == 1){
-                    activeFragment.onStart()
-                }else{
-                    securityFragment.onStart()
-                }
-                fragmentManager.beginTransaction().commit()
-                viewpager.adapter?.notifyDataSetChanged()
+//
+//                if(position == 1){
+//                    activeFragment.onStart()
+//                }else{
+//                    securityFragment.onStart()
+//                }
 
             }
         })
