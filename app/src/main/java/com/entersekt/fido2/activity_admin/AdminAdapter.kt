@@ -2,12 +2,11 @@ package com.entersekt.fido2.activity_admin
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.entersekt.fido2.R
-import com.entersekt.fido2.activity_admin.AdminViewHolder
-import com.entersekt.fido2.activity_admin.AdminData
-
 
 class AdminAdapter (private val context: Context): RecyclerView.Adapter<AdminViewHolder>(){
     var datas  = mutableListOf<AdminData>()
@@ -21,4 +20,15 @@ class AdminAdapter (private val context: Context): RecyclerView.Adapter<AdminVie
 
     override fun onBindViewHolder(holder: AdminViewHolder, position: Int) {holder.bind(datas[position])}
 
+}
+
+class AdminViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
+
+    val txt_AdminUser = itemView.findViewById<TextView>(R.id.txt_AdminUser)
+    val txt_AdminRating = itemView.findViewById<TextView>(R.id.txt_AdminRating)
+
+    fun bind(adminData: AdminData){
+        txt_AdminUser.text = adminData.txt_AdminUser
+        txt_AdminRating.text = adminData.txt_AdminRating
+    }
 }
