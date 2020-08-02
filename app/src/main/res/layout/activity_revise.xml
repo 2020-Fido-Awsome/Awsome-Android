@@ -16,11 +16,11 @@
         android:text="AWS"
         android:textColor="#8C8C8C"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/txt_newUserName"
+        app:layout_constraintStart_toStartOf="@+id/txt_newSsid"
         app:layout_constraintTop_toBottomOf="@+id/main_bar" />
 
     <EditText
-        android:id="@+id/txt_newUserName"
+        android:id="@+id/txt_newSsid"
         android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_marginStart="80dp"
@@ -46,7 +46,7 @@
         android:paddingLeft="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_newUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_newSsid" />
 
     <EditText
         android:id="@+id/txt_repwd"
