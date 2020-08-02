@@ -45,14 +45,13 @@
         </activity>
         <activity android:name=".activity_admin.AdminActivity" />
         <activity android:name=".SecurityActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".QrActivity">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".QrActivity"/>
     </application>
 
 </manifest>
