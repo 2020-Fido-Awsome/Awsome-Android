@@ -29,7 +29,7 @@ class ReviseActivity : AppCompatActivity() {
         setContentView(R.layout.activity_revise)
 
         btn_back.setOnClickListener {
-            Disconnect().start()
+            ReviseDisconnect().start()
             finish()
         }
 
@@ -76,7 +76,7 @@ class ReviseActivity : AppCompatActivity() {
         }
     }
 
-    class Disconnect:Thread(){
+    class ReviseDisconnect:Thread(){
         override fun run() {
             try{
                 socket.close()
