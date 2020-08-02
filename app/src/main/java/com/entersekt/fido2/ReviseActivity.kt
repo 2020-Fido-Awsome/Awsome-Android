@@ -21,7 +21,7 @@ class ReviseActivity : AppCompatActivity() {
         var msg = "0"
     }
 
-    var username = ""
+    var ssid = ""
     var pwd = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,18 +34,18 @@ class ReviseActivity : AppCompatActivity() {
         }
 
         btn_revise.setOnClickListener {
-            if(txt_newUserName.text.isNullOrBlank() || txt_pwd.text.isNullOrBlank() || txt_repwd.text.isNullOrBlank()){
+            if(txt_newSsid.text.isNullOrBlank() || txt_pwd.text.isNullOrBlank() || txt_repwd.text.isNullOrBlank()){
                 Toast.makeText(this, "아이디 또는 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else{
                 if(txt_pwd.text.toString() == txt_repwd.text.toString()){
-                    username = txt_newUserName.text.toString()
+                    ssid = txt_newSsid.text.toString()
                     pwd = txt_pwd.text.toString()
 
-                    Connect(username, pwd).start()
+                    Connect(ssid, pwd).start()
 
                     val intent = Intent(this, InformationActivity::class.java)
-                    intent.putExtra("username", username)
+                    intent.putExtra("username", ssid)
                     startActivity(intent)
                     finish()
 
@@ -56,8 +56,8 @@ class ReviseActivity : AppCompatActivity() {
         }
     }
 
-    class Connect(username: String, pwd: String) :Thread(){
-        val username = username
+    class Connect(ssid: String, pwd: String) :Thread(){
+        val ssid = ssid
         val pwd = pwd
         override fun run(){
             try{
@@ -65,7 +65,7 @@ class ReviseActivity : AppCompatActivity() {
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = "changeinfo% ${username}% ${pwd}"
+                msg = "changeinfo/${ssid}/${pwd}"
 
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
