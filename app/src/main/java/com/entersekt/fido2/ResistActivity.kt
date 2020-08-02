@@ -69,6 +69,7 @@ class ResistActivity : AppCompatActivity() {
             .setRp(PublicKeyCredentialRpEntity("awsomewifi.firebaseapp.com", "Fido2Demo", null))
             .setUser(
                 PublicKeyCredentialUserEntity(
+
                     "demo@example.com".toByteArray(),
                     "demo@example.com",
                     null,
@@ -175,7 +176,7 @@ class ResistActivity : AppCompatActivity() {
 
         resultText.text = registerFido2Result
         Toast.makeText(this, "회원가입 성공했습니다", Toast.LENGTH_LONG).show()
-        var intent = Intent(this, StoreActivity::class.java);
+        var intent = Intent(this, AuthnActivity::class.java);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

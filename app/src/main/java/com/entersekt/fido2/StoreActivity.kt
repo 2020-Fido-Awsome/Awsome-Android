@@ -31,7 +31,7 @@ class StoreActivity : AppCompatActivity() {
 //                    txt_pwd.setText("")
 //                    txt_repwd.setText("")
 
-                    val intent = Intent(this, AuthnActivity::class.java)
+                    val intent = Intent(this, ResistActivity::class.java)
                     startActivity(intent)
                     finish()
 

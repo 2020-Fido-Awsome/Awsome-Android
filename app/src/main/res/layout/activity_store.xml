@@ -7,6 +7,21 @@
     tools:context=".InformationActivity">
 
 
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="80dp"
+        android:background="@drawable/input_box"
+        android:ems="10"
+        android:hint="사용하실  닉네임을 입력해주세요."
+        android:paddingLeft="30dp"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_defaultUserName" />
 
     <EditText
         android:id="@+id/txt_ckpwd"
@@ -17,9 +32,9 @@
         android:layout_marginEnd="80dp"
         android:background="@drawable/input_box"
         android:ems="10"
-        android:hint="공유기 비밀번호를 재확인하세요."
-        android:paddingLeft="30dp"
+        android:hint="비밀번호를 다시 입력해주세요."
         android:inputType="textPassword"
+        android:paddingLeft="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_defaultpwd" />
@@ -33,12 +48,12 @@
         android:layout_marginEnd="80dp"
         android:background="@drawable/input_box"
         android:ems="10"
-        android:hint="공유기 비밀번호를 설정하세요."
-        android:paddingLeft="30dp"
+        android:hint="사용하실 비밀번호를 입력해주세요."
         android:inputType="textPassword"
+        android:paddingLeft="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_defaultUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <EditText
         android:id="@+id/text_defaultUserName"
@@ -49,9 +64,9 @@
         android:layout_marginEnd="80dp"
         android:background="@drawable/input_box"
         android:ems="10"
-        android:hint="사용할 닉네임을 입력해주세요."
-        android:paddingLeft="30dp"
+        android:hint="사용하실 ID를 입력해주세요."
         android:inputType="textPersonName"
+        android:paddingLeft="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_welcome" />
@@ -61,26 +76,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="70dp"
-        android:text="Welcome"
+        android:layout_marginTop="50dp"
+        android:text="회원가입"
         android:textColor="@color/colorPrimary"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_bar" />
-
-    <ImageView
-        android:id="@+id/btn_put"
-        android:layout_width="350dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="80dp"
-        app:srcCompat="@drawable/reg_ok"
-        android:stateListAnimator="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ckpwd" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_bar"
@@ -104,5 +106,19 @@
             app:layout_constraintVertical_bias="0.727" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/btn_put"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="80dp"
+        android:stateListAnimator="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ckpwd"
+        app:srcCompat="@drawable/reg_ok" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
