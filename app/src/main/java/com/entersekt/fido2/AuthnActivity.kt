@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Base64
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.google.android.gms.fido.Fido
@@ -27,7 +28,6 @@ class AuthnActivity : AppCompatActivity() {
         setContentView(R.layout.activity_authn)
         //registerFido2Button.setOnClickListener { registerFido2() }
         signFido2()
-
 
 
     }
@@ -182,7 +182,7 @@ class AuthnActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 
-        startActivity(intent)
+        //startActivity(intent)
     }
 
     /**
@@ -237,4 +237,5 @@ class AuthnActivity : AppCompatActivity() {
             ?: return null
         return Base64.decode(keyHandleBase64, Base64.DEFAULT)
     }
+
 }
