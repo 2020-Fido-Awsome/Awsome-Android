@@ -181,7 +181,7 @@ class ResistActivity : AppCompatActivity() {
                 "$attestationObjectBase64\n"
 
         //회원가입 성공-소켓 통신 호출
-        StoreActivity.StoreConnect(intent.getStringExtra("nick"), intent.getStringExtra("pwd")).start()
+        StoreActivity.StoreConnect(intent.getStringExtra("nick")).start()
 
         resultText.text = registerFido2Result
         Toast.makeText(this, "회원가입 성공했습니다", Toast.LENGTH_LONG).show()

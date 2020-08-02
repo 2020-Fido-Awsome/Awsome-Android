@@ -21,7 +21,6 @@ class StoreActivity : AppCompatActivity() {
     }
 
     var usernick = ""
-    var pwd = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +37,9 @@ class StoreActivity : AppCompatActivity() {
 //                    inputMethodManager.hideSoftInputFromWindow(txt_ckpwd.getWindowToken(), 0);
 
                     usernick = editTextTextPersonName.text.toString()
-                    pwd = txt_defaultpwd.text.toString()
 
                     val intent = Intent(this, ResistActivity::class.java)
                     intent.putExtra("nick", usernick)
-                    intent.putExtra("pwd", pwd)
                     startActivity(intent)
                     finish()
 
@@ -53,16 +50,15 @@ class StoreActivity : AppCompatActivity() {
         }
     }
 
-    class StoreConnect(nick: String, pwd: String) :Thread(){
+    class StoreConnect(nick: String) :Thread(){
         val usernick = nick
-        val pwd = pwd
         override fun run(){
             try{
                 socket = Socket(ip, port)
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = "setinfo/${usernick}/${pwd}"
+                msg = "setinfo/${usernick}"
 
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
