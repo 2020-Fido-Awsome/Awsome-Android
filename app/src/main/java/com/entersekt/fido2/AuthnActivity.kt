@@ -66,7 +66,7 @@ class AuthnActivity : AppCompatActivity() {
     private fun registerFido2() {
         // All the option parameters should come from the Relying Party / server
         val options = PublicKeyCredentialCreationOptions.Builder()
-            .setRp(PublicKeyCredentialRpEntity("awsomewifi.firebaseapp.com", "Fido2Demo", null))
+            .setRp(PublicKeyCredentialRpEntity("aws.eazysecure-auth.com", "Fido2Demo", null))
             .setUser(
                 PublicKeyCredentialUserEntity(
                     "demo@example.com".toByteArray(),
