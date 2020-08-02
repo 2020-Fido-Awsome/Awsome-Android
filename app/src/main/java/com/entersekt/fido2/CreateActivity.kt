@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.entersekt.fido2.activity_host.HostActivity
 import com.google.zxing.integration.android.IntentIntegrator
 
 
@@ -13,6 +12,10 @@ class CreateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create)
 
+        val qrScan = IntentIntegrator(this);
+        qrScan.setOrientationLocked(false);
+        qrScan.setPrompt("QR코드를 스캔해주세요");
+        qrScan.initiateScan();  // 0802 추가
         IntentIntegrator(this).initiateScan()
 
     }
