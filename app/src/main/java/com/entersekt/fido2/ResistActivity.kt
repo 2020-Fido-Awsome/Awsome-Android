@@ -29,6 +29,7 @@ class ResistActivity : AppCompatActivity() {
         registerFido2()
         //signFido2Button.setOnClickListener { signFido2() }
         //signFido2Button.isEnabled = loadKeyHandle() != null
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -183,6 +184,7 @@ class ResistActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         startActivity(intent)
+        finish()
     }
 
     /**

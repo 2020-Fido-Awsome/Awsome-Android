@@ -38,6 +38,8 @@ class CreateActivity : AppCompatActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 startActivity(intent)
+                finish()
+
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
