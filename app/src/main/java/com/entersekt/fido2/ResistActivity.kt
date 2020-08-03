@@ -76,10 +76,10 @@ class ResistActivity : AppCompatActivity() {
             .setUser(
                 PublicKeyCredentialUserEntity(
 
-                    "demo@example.com".toByteArray(),
-                    "demo@example.com",
+                    "0803".toByteArray(),
+                    "0803",
                     null,
-                    "Demo User"
+                    "0803"
                 )
             )
             .setChallenge(challenge())
