@@ -23,7 +23,7 @@ class SecurityFragment : Fragment() {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
-        var ip = "172.20.10.2"  //서버 ip
+        var ip = "192.168.0.254"  //서버 ip
         var port = 9999
         var msg = "0"
         var cnt = 0
@@ -45,14 +45,14 @@ class SecurityFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        datas.clear()
-        println("securityfragment")
+        println("securityfragmentOnViewCreated")
 
         securityAdapter = SecurityAdapter(view.context)
         rv_security.adapter = securityAdapter
         rv_security.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         Connect().start()
         loadDatas()
+        onStart()
     }
 
     //비동기 소켓통신
@@ -64,7 +64,7 @@ class SecurityFragment : Fragment() {
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = "activity_log"
+                msg = "security_log"
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
                 cnt = readSocket.read()
@@ -84,7 +84,7 @@ class SecurityFragment : Fragment() {
         override fun run() {
             try{
                 socket.close()
-                ThreadDeath()
+//                ThreadDeath()
             }catch(e:Exception){
 
             }
@@ -123,8 +123,10 @@ class SecurityFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        datas.clear()
 
-        println("securityFragment")
+        println("securityFragmentOnStart")
+//        Connect().start()
+//        loadDatas()
     }
-
 }

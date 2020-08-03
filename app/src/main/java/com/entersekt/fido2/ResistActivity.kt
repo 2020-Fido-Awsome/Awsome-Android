@@ -23,12 +23,14 @@ class ResistActivity : AppCompatActivity() {
         private const val KEY_HANDLE_PREF = "key_handle"
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resist)
         registerFido2()
         //signFido2Button.setOnClickListener { signFido2() }
         //signFido2Button.isEnabled = loadKeyHandle() != null
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -175,14 +177,18 @@ class ResistActivity : AppCompatActivity() {
                 "attestationObjectBase64:\n" +
                 "$attestationObjectBase64\n"
 
+        //회원가입 성공-소켓 통신 호출
+        StoreActivity.StoreConnect(intent.getStringExtra("nick")).start()
+
         resultText.text = registerFido2Result
         Toast.makeText(this, "회원가입 성공했습니다", Toast.LENGTH_LONG).show()
-        var intent = Intent(this, AuthnActivity::class.java);
+        var intent = Intent(this, SignActivity::class.java);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         startActivity(intent)
+        finish()
     }
 
     /**

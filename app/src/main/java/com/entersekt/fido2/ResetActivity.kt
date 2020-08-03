@@ -13,7 +13,7 @@ class ResetActivity : AppCompatActivity() {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
-        var ip = "192.168.0.254"  //서버 ip
+        var ip = "192.168.0.40"  //서버 ip
         var port = 9999
         var msg = "0"
     }
@@ -23,7 +23,7 @@ class ResetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reset)
 
         btn_back.setOnClickListener {
-            Disconnect().start()
+            ResetDisconnect().start()
             finish()
         }
 
@@ -40,22 +40,22 @@ class ResetActivity : AppCompatActivity() {
         val con = i
         override fun run(){
             try{
-                SecurityActivity.socket = Socket(SecurityActivity.ip, SecurityActivity.port)
-                SecurityActivity.writeSocket = DataOutputStream(SecurityActivity.socket.getOutputStream())
-                SecurityActivity.readSocket = DataInputStream(SecurityActivity.socket.getInputStream())
+                socket = Socket(ip, port)
+                writeSocket = DataOutputStream(socket.getOutputStream())
+                readSocket = DataInputStream(socket.getInputStream())
 
-                SecurityActivity.msg = if(con == 1){"restart"}else "reset"
+                msg = if(con == 1){"restart"}else "reset"
 
-                SecurityActivity.writeSocket.write(SecurityActivity.msg.toByteArray())    //메시지 전송 명령 전송
+                writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
             }catch(e:Exception){    //연결 실패
-                SecurityActivity.socket.close()
+                socket.close()
             }
 
         }
     }
 
-    class Disconnect:Thread(){
+    class ResetDisconnect:Thread(){
         override fun run() {
             try{
                 socket.close()

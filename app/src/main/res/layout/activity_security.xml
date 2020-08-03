@@ -86,7 +86,7 @@
                 android:track="@drawable/switch_track_selector"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:checked="true" />
+                android:checked="false" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -117,12 +117,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
             <Switch
-                android:id="@+id/switch3"
+                android:id="@+id/act_sec_switch_syn_flooding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
-                android:checked="true"
+                android:checked="false"
                 android:thumb="@drawable/switch_thumb_off"
                 android:track="@drawable/switch_track_selector"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -157,11 +157,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <Switch
+                android:id="@+id/act_sec_switch_ddos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
-                android:checked="true"
+                android:checked="false"
                 android:thumb="@drawable/switch_thumb_off"
                 android:track="@drawable/switch_track_selector"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -196,12 +197,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             <Switch
-                android:id="@+id/switch5"
+                android:id="@+id/act_sec_switch_dns_spoofing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
-                android:checked="true"
+                android:checked="false"
                 android:thumb="@drawable/switch_thumb_off"
                 android:track="@drawable/switch_track_selector"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -237,12 +238,12 @@
                 />
 
             <Switch
-                android:id="@+id/switch6"
+                android:id="@+id/act_sec_switch_command_injection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
-                android:checked="true"
+                android:checked="false"
                 android:thumb="@drawable/switch_thumb_off"
                 android:track="@drawable/switch_track_selector"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -277,12 +278,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
             <Switch
-                android:id="@+id/switch8"
+                android:id="@+id/act_sec_switch_qr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
-                android:checked="true"
+                android:checked="false"
                 android:thumb="@drawable/switch_thumb_off"
                 android:track="@drawable/switch_track_selector"
                 app:layout_constraintEnd_toEndOf="parent"
