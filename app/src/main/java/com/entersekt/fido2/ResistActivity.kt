@@ -1,6 +1,5 @@
 package com.entersekt.fido2
 
-import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
@@ -13,9 +12,6 @@ import androidx.core.content.edit
 import com.google.android.gms.fido.Fido
 import com.google.android.gms.fido.fido2.api.common.*
 import kotlinx.android.synthetic.main.activity_resist.*
-import java.io.DataInputStream
-import java.io.DataOutputStream
-import java.net.Socket
 import java.security.SecureRandom
 
 
