@@ -9,7 +9,7 @@ import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
 
-class StoreActivity : AppCompatActivity() {
+class SignupActivity : AppCompatActivity() {
 
     companion object {
         var socket = Socket()

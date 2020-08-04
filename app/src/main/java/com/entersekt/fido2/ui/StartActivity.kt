@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_sign.*
 
-class SignActivity : AppCompatActivity() {
+class StartActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

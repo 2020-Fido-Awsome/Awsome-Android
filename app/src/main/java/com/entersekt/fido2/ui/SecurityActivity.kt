@@ -1,11 +1,12 @@
 package com.entersekt.fido2
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_security.*
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
+
 
 class SecurityActivity : AppCompatActivity() {
 
@@ -13,7 +14,7 @@ class SecurityActivity : AppCompatActivity() {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
-        var ip = "192.168.1.167"  //서버 ip
+        var ip = "192.168.0.254"  //서버 ip
         var port = 9999
         var msg = "0"
         var data = ""
@@ -66,7 +67,7 @@ class SecurityActivity : AppCompatActivity() {
             } else Connect(10).start()
         }
 
-        if(data.isNotEmpty()){
+        if (!data.isNullOrEmpty()) {
             setStatus()
         }
     }
@@ -83,7 +84,8 @@ class SecurityActivity : AppCompatActivity() {
 
                 var dataArr = ByteArray(1024) // 1024만큼 데이터 받기
                 readSocket.read(dataArr) // byte array에 데이터를 씁니다.
-                data = String(dataArr).split(',').toString()// 서버에서 보내준 한 줄 전체 - 쓰레기값 지움
+                data = String(dataArr)// 서버에서 보내준 한 줄 전체 - 쓰레기값 지움
+                println("data : ${data}")
 
             } catch (e: Exception) {    //연결 실패
                 socket.close()
@@ -135,13 +137,15 @@ class SecurityActivity : AppCompatActivity() {
     }
 
     private fun setStatus() {
-        println("data : ${data}")
-        act_sec_switch_arp_spoofing.isChecked = data.split('/')[1] == "on"
-        act_sec_switch_syn_flooding.isChecked = data.split('/')[2] == "on"
-        act_sec_switch_ddos.isChecked = data.split('/')[3] == "on"
-        act_sec_switch_dns_spoofing.isChecked = data.split('/')[4] == "on"
-        act_sec_switch_command_injection.isChecked = data.split('/')[5] == "on"
-        act_sec_switch_qr.isChecked = data.split('/')[6] == "on"
+        println("data!!!! : ${data}")
+
+        act_sec_switch_arp_spoofing.isChecked = (data.split(',')[1] == "on")
+        act_sec_switch_syn_flooding.isChecked = (data.split(',')[2] == "on")
+        act_sec_switch_ddos.isChecked = data.split(',')[3] == "on"
+        act_sec_switch_dns_spoofing.isChecked = data.split(',')[4] == "on"
+        act_sec_switch_command_injection.isChecked = data.split(',')[5] == "on"
+        act_sec_switch_qr.isChecked = data.split(',')[6] == "on"
+
     }
 
 }

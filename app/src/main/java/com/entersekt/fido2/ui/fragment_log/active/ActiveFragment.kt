@@ -1,35 +1,30 @@
-package com.entersekt.fido2.fragment_log.security
+package com.entersekt.fido2.fragment_log.active
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.entersekt.fido2.R
-import com.entersekt.fido2.fragment_log.active.ActiveAdapter
-import com.entersekt.fido2.fragment_log.active.ActiveData
-import com.entersekt.fido2.fragment_log.active.ActiveFragment
-import kotlinx.android.synthetic.main.fragment_security.*
+import kotlinx.android.synthetic.main.fragment_active.*
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
 
-
-class SecurityFragment : Fragment() {
+class ActiveFragment : Fragment() {
 
     companion object{
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
-        var ip = "192.168.0.254"  //서버 ip
+        var ip = "172.18.21.22"  //서버 ip
         var port = 9999
         var msg = "0"
         var cnt = 0
         var data = ""
-        val datas = mutableListOf<SecurityData>()
-        lateinit var securityAdapter: SecurityAdapter
+        val datas = mutableListOf<ActiveData>()
+        lateinit var activeAdapter: ActiveAdapter
     }
 
     private var dataArr = arrayOfNulls<String>(cnt)
@@ -39,19 +34,18 @@ class SecurityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_security, container, false)
+
+        return inflater.inflate(R.layout.fragment_active, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        println("securityfragmentOnViewCreated")
+        activeAdapter = ActiveAdapter(view.context)
+        println("activefragmentOnViewVreated")
 
-        securityAdapter = SecurityAdapter(view.context)
-        rv_security.adapter = securityAdapter
-        rv_security.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        Connect().start()
-        loadDatas()
+        rv_active.adapter = activeAdapter
+        rv_active.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         onStart()
     }
 
@@ -64,7 +58,7 @@ class SecurityFragment : Fragment() {
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = "security_log"
+                msg = "active_log"
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
                 cnt = readSocket.read()
@@ -105,19 +99,19 @@ class SecurityFragment : Fragment() {
 
             datas.apply {
                 add(
-                    SecurityData(
-                        txt_SecurityDate = dataArr[i]!!.split(',')[0],
-                        txt_SecurityTime = dataArr[i]!!.split(',')[1],
-                        txt_SecurityContent = dataArr[i]!!.split(',')[2]
+                    ActiveData(
+                        txt_ActiveDate = dataArr[i]!!.split(',')[0],
+                        txt_ActiveTime = dataArr[i]!!.split(',')[1],
+                        txt_ActiveContent = dataArr[i]!!.split(',')[2]
                     )
                 )
             }
 
-            securityAdapter.datas = datas
-            securityAdapter.notifyDataSetChanged()
+            activeAdapter.datas = datas
+            activeAdapter.notifyDataSetChanged()
 
         }
-        securityAdapter.notifyDataSetChanged()
+        activeAdapter.notifyDataSetChanged()
 
     }
 
@@ -125,8 +119,9 @@ class SecurityFragment : Fragment() {
         super.onStart()
         datas.clear()
 
-        println("securityFragmentOnStart")
-//        Connect().start()
-//        loadDatas()
+        println("activefragmentOnStart")
+        Connect().start()
+        loadDatas()
     }
+
 }

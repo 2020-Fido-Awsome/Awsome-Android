@@ -7,6 +7,8 @@ import android.os.Looper
 import android.os.Message
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.entersekt.fido2.data.AwsomeApp
+import com.entersekt.fido2.data.DataManage
 import kotlinx.android.synthetic.main.activity_information.*
 import kotlinx.android.synthetic.main.activity_revise.btn_back
 import java.io.DataInputStream
@@ -28,6 +30,9 @@ class InformationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
+
+
+        println(DataManage.macAddress)
 
         Connect().start()
         btn_editpw.setOnClickListener {

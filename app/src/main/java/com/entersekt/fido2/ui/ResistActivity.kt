@@ -67,14 +67,14 @@ class ResistActivity : AppCompatActivity() {
 
     private fun registerFido2() {
         // All the option parameters should come from the Relying Party / server
+        Log.e("registerFido2 실행실행", "실행 시작")
         val options = PublicKeyCredentialCreationOptions.Builder()
             .setRp(PublicKeyCredentialRpEntity("aws.eazysecure-auth.com", "Fido2Demo", null))
             .setUser(
                 PublicKeyCredentialUserEntity(
-
                     "0803".toByteArray(),
                     "0803",
-                    null,
+                    "0803",
                     "0803"
                 )
             )
@@ -90,11 +90,40 @@ class ResistActivity : AppCompatActivity() {
             .build()
 
         val fido2ApiClient = Fido.getFido2ApiClient(applicationContext)
-        val fido2PendingIntentTask = fido2ApiClient.getRegisterIntent(options)
+        val fido2PendingIntentTask = fido2ApiClient.getRegisterIntent(options) // getRegisterPendingIntent
+
+//        fido2PendingIntentTask.addOnSuccessListener (
+//             OnSuccessListener() {
+//                @Override
+//                 fun onSuccess(pendingIntent : PendingIntent) {
+//                    if (pendingIntent != null) {
+//                        // Start a FIDO2 registration request.
+//                        Log.e("fido2PendingIntent","실행")
+//                        val activity = ResistActivity()
+//                        activity.startIntentSenderForResult(
+//                            pendingIntent.intentSender,
+//                            REQUEST_CODE_REGISTER,
+//                            null, // fillInIntent,
+//                            0, // flagsMask,
+//                            0, // flagsValue,
+//                            0 //extraFlags);
+//                        )
+//                    }
+//                }
+//            })
+//        fido2PendingIntentTask.addOnFailureListener(
+//             OnFailureListener() {
+//                @Override
+//                fun onFailure(e: Exception) {
+//                    // Fail
+//                }
+//            }
+//        )
+
         fido2PendingIntentTask.addOnSuccessListener { fido2PendingIntent ->
             if (fido2PendingIntent.hasPendingIntent()) {
                 try {
-                    Log.d(LOG_TAG, "launching Fido2 Pending Intent")
+                    Log.e("실행되라멍청아", "launching Fido2 Pending Intent")
                     fido2PendingIntent.launchPendingIntent(this@ResistActivity, REQUEST_CODE_REGISTER)
                 } catch (e: IntentSender.SendIntentException) {
                     e.printStackTrace()
@@ -125,7 +154,7 @@ class ResistActivity : AppCompatActivity() {
         fido2PendingIntentTask.addOnSuccessListener { fido2PendingIntent ->
             if (fido2PendingIntent.hasPendingIntent()) {
                 try {
-                    Log.d(LOG_TAG, "launching Fido2 Pending Intent")
+                    Log.e(LOG_TAG, "launching Fido2 Pending Intent")
                     fido2PendingIntent.launchPendingIntent(this@ResistActivity, REQUEST_CODE_SIGN)
                 } catch (e: IntentSender.SendIntentException) {
                     e.printStackTrace()
@@ -157,7 +186,7 @@ class ResistActivity : AppCompatActivity() {
      */
     private fun handleRegisterResponse(fido2Response: ByteArray) {
         val response = AuthenticatorAttestationResponse.deserializeFromBytes(fido2Response)
-        println(response)
+        Log.e(LOG_TAG, "응답바디: $response")
         val keyHandleBase64 = Base64.encodeToString(response.keyHandle, Base64.DEFAULT)
         val clientDataJson = String(response.clientDataJSON, Charsets.UTF_8)
         val attestationObjectBase64 = Base64.encodeToString(response.attestationObject, Base64.DEFAULT)
@@ -165,9 +194,9 @@ class ResistActivity : AppCompatActivity() {
         storeKeyHandle(response.keyHandle)
         //signFido2Button.isEnabled = true
 
-        Log.d(LOG_TAG, "keyHandleBase64: $keyHandleBase64")
-        Log.d(LOG_TAG, "clientDataJSON: $clientDataJson")
-        Log.d(LOG_TAG, "attestationObjectBase64: $attestationObjectBase64")
+        Log.e(LOG_TAG, "keyHandleBase64: $keyHandleBase64")
+        Log.e(LOG_TAG, "clientDataJSON: $clientDataJson")
+        Log.e(LOG_TAG, "attestationObjectBase64: $attestationObjectBase64")
 
         val registerFido2Result = "Authenticator Attestation Response\n\n" +
                 "keyHandleBase64:\n" +
@@ -178,11 +207,11 @@ class ResistActivity : AppCompatActivity() {
                 "$attestationObjectBase64\n"
 
         //회원가입 성공-소켓 통신 호출
-        StoreActivity.StoreConnect(intent.getStringExtra("nick")).start()
+        SignupActivity.StoreConnect(intent.getStringExtra("nick")).start()
 
         resultText.text = registerFido2Result
         Toast.makeText(this, "회원가입 성공했습니다", Toast.LENGTH_LONG).show()
-        var intent = Intent(this, SignActivity::class.java);
+        var intent = Intent(this, StartActivity::class.java);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
