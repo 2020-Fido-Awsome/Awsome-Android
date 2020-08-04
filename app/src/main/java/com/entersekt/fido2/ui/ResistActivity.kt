@@ -1,6 +1,5 @@
 package com.entersekt.fido2
 
-import android.app.PendingIntent
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
@@ -12,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.google.android.gms.fido.Fido
 import com.google.android.gms.fido.fido2.api.common.*
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import kotlinx.android.synthetic.main.activity_resist.*
 import java.security.SecureRandom
 
@@ -210,11 +207,11 @@ class ResistActivity : AppCompatActivity() {
                 "$attestationObjectBase64\n"
 
         //회원가입 성공-소켓 통신 호출
-        StoreActivity.StoreConnect(intent.getStringExtra("nick")).start()
+        SignupActivity.StoreConnect(intent.getStringExtra("nick")).start()
 
         resultText.text = registerFido2Result
         Toast.makeText(this, "회원가입 성공했습니다", Toast.LENGTH_LONG).show()
-        var intent = Intent(this, SignActivity::class.java);
+        var intent = Intent(this, StartActivity::class.java);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -1,13 +1,14 @@
 package com.entersekt.fido2
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.entersekt.fido2.activity_admin.AdminActivity
 import com.entersekt.fido2.activity_host.HostActivity
-import kotlinx.android.synthetic.main.activity_information.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.net.NetworkInterface
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,7 +41,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AdminActivity::class.java)
             startActivity(intent)
         }
+
+        var macAddress = getMACAddress("wlan0")
+        println(macAddress)
     }
+
     var lastTimeBackPressed:Long = 0
     override fun onBackPressed() {
         if (System.currentTimeMillis() - lastTimeBackPressed >= 2000) {
@@ -50,4 +55,25 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun getMACAddress(interfaceName: String?): String {
+        try {
+            val interfaces: List<NetworkInterface> =
+                Collections.list(NetworkInterface.getNetworkInterfaces())
+            for (intf in interfaces) {
+                if (interfaceName != null) {
+                    if (!intf.name.equals(interfaceName, ignoreCase = true)) continue
+                }
+                val mac: ByteArray = intf.hardwareAddress ?: return ""
+                val buf = StringBuilder()
+                for (idx in mac.indices) buf.append(String.format("%02X:", mac[idx]))
+                if (buf.length > 0) buf.deleteCharAt(buf.length - 1)
+                return buf.toString()
+            }
+        } catch (ex: Exception) {
+        } // for now eat exceptions
+        return ""
+    }
+
+
 }
