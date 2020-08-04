@@ -1,16 +1,22 @@
 package com.entersekt.fido2
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.UserManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.entersekt.fido2.activity_admin.AdminActivity
 import com.entersekt.fido2.activity_host.HostActivity
+import com.entersekt.fido2.data.AwsomeApp
+import com.entersekt.fido2.data.DataManage
 import kotlinx.android.synthetic.main.activity_main.*
 import java.net.NetworkInterface
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +48,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        var macAddress = getMACAddress("wlan0")
-        println(macAddress)
+
+        val macAddress = getMACAddress("wlan0")
+        DataManage.macAddress = macAddress
+
     }
 
     var lastTimeBackPressed:Long = 0
