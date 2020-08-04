@@ -16,7 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".SplashActivity"/>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".InformationActivity" />
         <activity android:name=".activity_host.HostActivity" />
         <activity android:name=".ResetActivity" />
@@ -30,7 +35,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="http" android:host="aws.eazysecure-auth.com" />
-                <data android:scheme="https" />
+                <data android:scheme="https" android:host="aws.eazysecure-auth.com"/>
             </intent-filter>
         </activity>
         <activity android:name=".StoreActivity" />
@@ -40,18 +45,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="http" android:host="aws.eazysecure-auth.com" />
-                <data android:scheme="https" />
+                <data android:scheme="https" android:host="aws.eazysecure-auth.com"/>
             </intent-filter>
         </activity>
         <activity android:name=".activity_admin.AdminActivity" />
         <activity android:name=".SecurityActivity" />
-        <activity android:name=".MainActivity" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".QrActivity"/>
     </application>
 
