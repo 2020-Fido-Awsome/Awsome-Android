@@ -9,6 +9,8 @@ import kotlinx.android.synthetic.main.activity_revise.*
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
+import com.entersekt.fido2.KeyStore.Companion
+
 
 class ReviseActivity : AppCompatActivity() {
 
@@ -42,10 +44,17 @@ class ReviseActivity : AppCompatActivity() {
                     ssid = txt_newSsid.text.toString()
                     pwd = txt_pwd.text.toString()
 
+                    KeyStore.wp = KeyStore.encryptData(pwd)
+                    KeyStore.ws = KeyStore.encryptData(ssid)
+
                     Connect(ssid, pwd).start()
 
-                    val intent = Intent(this, InformationActivity::class.java)
-                    intent.putExtra("username", ssid)
+//                    val intent = Intent(this, InformationActivity::class.java)
+//                    intent.putExtra("username", ssid)
+//                    startActivity(intent)
+//                    finish()
+
+                    val intent = Intent(this, QrActivity::class.java)
                     startActivity(intent)
                     finish()
 

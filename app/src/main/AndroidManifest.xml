@@ -33,7 +33,7 @@
                 <data android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity android:name=".StoreActivity" />
+        <activity android:name=".StoreActivity"/>
         <activity android:name=".ResistActivity" >
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
@@ -45,13 +45,13 @@
         </activity>
         <activity android:name=".activity_admin.AdminActivity" />
         <activity android:name=".SecurityActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".QrActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".QrActivity"/>
     </application>
 
 </manifest>

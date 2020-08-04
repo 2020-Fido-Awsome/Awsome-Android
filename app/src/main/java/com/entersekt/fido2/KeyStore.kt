@@ -17,6 +17,9 @@ import javax.crypto.spec.IvParameterSpec
 class KeyStore {
 
     companion object {
+        var exist = false
+        var wp = encryptData("awsfido2020!")
+        var ws = encryptData("AWS")
 
         @RequiresApi(Build.VERSION_CODES.M)
         fun genKey() {
@@ -67,13 +70,16 @@ class KeyStore {
     }
 }
 
-fun main(args: Array<String>) {
-    val pair = Companion.encryptData("Test this encryption")
-    val decryptedData = Companion.decryptData(pair.first, pair.second)
-    val encrypted = pair.second.toString(Charsets.UTF_8)
+/*
+val pair = encryptData("Test this encryption")
+val decryptedData = decryptData(pair.first, pair.second)
+val encrypted = pair.second.toString(Charsets.UTF_8)
 
-    println("Encrypted data: $encrypted")
-    println("Decrypted data: $decryptedData")
+            println("Encrypted data: $encrypted")
+            println("Decrypted data: $decryptedData")
 
-}
+
+a.plus(b)
+* */
+
 
