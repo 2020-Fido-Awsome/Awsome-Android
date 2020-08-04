@@ -24,7 +24,6 @@ class ActiveAdapter (private val context: Context): RecyclerView.Adapter<ActiveV
     override fun onBindViewHolder(holder: ActiveViewHolder, position: Int) {
         holder.bind(datas[position])
     }
-
 }
 
 class ActiveViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
