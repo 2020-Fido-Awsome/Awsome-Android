@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="80dp"
@@ -26,7 +26,7 @@
     <EditText
         android:id="@+id/txt_ckpwd"
         android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="80dp"
@@ -42,7 +42,7 @@
     <EditText
         android:id="@+id/txt_defaultpwd"
         android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="80dp"
@@ -58,7 +58,7 @@
     <EditText
         android:id="@+id/text_defaultUserName"
         android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="80dp"
@@ -110,7 +110,7 @@
     <ImageView
         android:id="@+id/btn_put"
         android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="80dp"

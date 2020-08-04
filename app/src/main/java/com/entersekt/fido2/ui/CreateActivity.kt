@@ -32,7 +32,7 @@ class CreateActivity : AppCompatActivity() {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
-                val intent = Intent(this, StoreActivity::class.java)
+                val intent = Intent(this, SignupActivity::class.java)
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
