@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activity_admin.AdminActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,8 +29,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
             android:gravity="center_horizontal"
             android:text="관리자 목록"
+            android:textColor="@color/greyish_brown"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +44,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,11 +53,11 @@
         app:srcCompat="@drawable/listbar2" />
 
     <androidx.recyclerview.widget.RecyclerView
-
         android:id="@+id/rv_admin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="35dp"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"

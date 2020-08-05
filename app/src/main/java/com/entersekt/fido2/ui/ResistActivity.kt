@@ -20,15 +20,27 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.DataInputStream
+import java.io.DataOutputStream
+import java.net.Socket
 import java.security.SecureRandom
 
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class ResistActivity : AppCompatActivity() {
     companion object {
         private const val LOG_TAG = "Fido2Demo"
         private const val REQUEST_CODE_REGISTER = 1
         private const val REQUEST_CODE_SIGN = 2
         private const val KEY_HANDLE_PREF = "key_handle"
+
+        var socket = Socket()
+        lateinit var writeSocket: DataOutputStream
+        lateinit var readSocket: DataInputStream
+        var ip = "192.168.0.254"  //서버 ip
+        var port = 9999
+        var msg = "0"
+        var nick = "defaultNickName"
     }
 
 
@@ -42,6 +54,8 @@ class ResistActivity : AppCompatActivity() {
         //signFido2Button.setOnClickListener { signFido2() }
         //signFido2Button.isEnabled = loadKeyHandle() != null
 
+        nick = intent.getStringExtra("nick")!!
+        println("등록 실행시 : $nick")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -197,7 +211,7 @@ class ResistActivity : AppCompatActivity() {
                 "$attestationObjectBase64\n"
 
         //회원가입 성공-소켓 통신 호출
-        SignupActivity.StoreConnect(intent.getStringExtra("nick")!!).start()
+        SigninConnect(nick).start()
 
         resultText.text = registerFido2Result
         Toast.makeText(this, "회원가입 성공했습니다", Toast.LENGTH_LONG).show()
@@ -253,6 +267,25 @@ class ResistActivity : AppCompatActivity() {
     private fun storeKeyHandle(keyHandle: ByteArray) {
         editor.putString(KEY_HANDLE_PREF, Base64.encodeToString(keyHandle, Base64.DEFAULT))
     }
+
+    class SigninConnect(nick: String) : Thread() {
+        private val usernick = nick
+        override fun run() {
+            try {
+                socket = Socket(ip, port)
+                writeSocket = DataOutputStream(socket.getOutputStream())
+                readSocket = DataInputStream(socket.getInputStream())
+
+                msg = "${DataManage.macAddress}/setinfo/${usernick}"
+                writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
+                socket.close()
+            } catch (e: Exception) {    //연결 실패
+                socket.close()
+            }
+
+        }
+    }
+
 }
 
 private fun loadKeyHandle(): ByteArray? {
@@ -296,3 +329,4 @@ fun connect() {
     })
 
 }
+

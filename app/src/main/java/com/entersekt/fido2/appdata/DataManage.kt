@@ -28,7 +28,7 @@ object DataManage{
         }!!
 
     var macAddress: String? // **sha256으로 저장한 nick+mac/setinfo/usernick 임**
-        get() = pref.getString("shaInfo", "/setinfo/usernick")
+        get() = pref.getString("shaInfo", "")
         set(value) = pref.edit{
             it.putString("shaInfo", value)?.apply()
         }!!
