@@ -26,7 +26,7 @@ class InformationActivity : AppCompatActivity() {
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
         var mHandler = Handler()
-        var ip = "192.168.0.254"  //서버 ip
+        var ip = "192.168.200.141"  //서버 ip
         var port = 9999
         var msg = "0"
     }
@@ -35,9 +35,6 @@ class InformationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
-
-
-        println(DataManage.mac)
 
         Connect().start()
         btn_editpw.setOnClickListener {
@@ -106,7 +103,8 @@ class InformationActivity : AppCompatActivity() {
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = "aa/routerinfo"
+                msg = "${DataManage.macAddress}/routerinfo"
+
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
                 var dataArr = ByteArray(1024) // 1024만큼 데이터 받기

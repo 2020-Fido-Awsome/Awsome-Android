@@ -5,21 +5,13 @@ import android.view.View
 import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.entersekt.fido2.R
 import com.entersekt.fido2.fragment_log.LogAdapter
-import com.entersekt.fido2.fragment_log.active.ActiveFragment
-import com.entersekt.fido2.fragment_log.security.SecurityFragment
 import kotlinx.android.synthetic.main.activity_log.*
 
 
 class LogActivity : AppCompatActivity() {
-
-
-    private val activeFragment : Fragment = ActiveFragment()
-    private val securityFragment = SecurityFragment()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
