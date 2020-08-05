@@ -18,7 +18,10 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity android:name=".ui.SplashActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.InformationActivity" />
         <activity android:name=".activity_host.HostActivity" />
@@ -49,10 +52,7 @@
         <activity android:name=".activity_admin.AdminActivity" />
         <activity android:name=".ui.SecurityActivity" />
         <activity android:name=".ui.MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".ui.QrActivity"/>
     </application>

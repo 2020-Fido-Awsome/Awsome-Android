@@ -22,7 +22,7 @@ class HostActivity : AppCompatActivity() {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
-        var ip = "172.18.21.22"  //서버 ip
+        var ip = "172.20.10.2"  //서버 ip
         var port = 9999
         var msg = "0"
         var cnt = 0
@@ -35,8 +35,6 @@ class HostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_host)
         datas.clear()
-
-        println(DataManage.macAddress)
 
         btn_back.setOnClickListener {
 //            HostDisconnect().start()
@@ -111,8 +109,6 @@ class HostActivity : AppCompatActivity() {
             }
 
             writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
-
-//            changeData(position, host, mac, ip, status)
 
         }
 
