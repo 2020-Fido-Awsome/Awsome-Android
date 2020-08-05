@@ -1,16 +1,18 @@
-package com.entersekt.fido2
+package com.entersekt.fido2.ui
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
-import android.os.UserManager
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.entersekt.fido2.R
 import com.entersekt.fido2.activity_admin.AdminActivity
 import com.entersekt.fido2.activity_host.HostActivity
-import com.entersekt.fido2.data.AwsomeApp
-import com.entersekt.fido2.data.DataManage
+import com.entersekt.fido2.appdata.DataManage
+import com.entersekt.fido2.ui.LogActivity
+import com.entersekt.fido2.ui.ResetActivity
+import com.entersekt.fido2.ui.SecurityActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.net.NetworkInterface
 import java.util.*

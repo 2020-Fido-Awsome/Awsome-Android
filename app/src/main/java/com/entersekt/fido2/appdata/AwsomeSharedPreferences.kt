@@ -1,10 +1,10 @@
-package com.entersekt.fido2.data
+package com.entersekt.fido2.appdata
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.core.content.edit
+import com.entersekt.fido2.appdata.AwsomeApp
 
 class AwsomeSharedPreferences (context: Context){
 

@@ -1,5 +1,6 @@
-package com.entersekt.fido2
+package com.entersekt.fido2.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.*
 import android.util.Log
@@ -7,8 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.entersekt.fido2.R
 import com.entersekt.fido2.appdata.DataManage
-import com.entersekt.fido2.data.AwsomeApp
-import com.entersekt.fido2.data.DataManage
+import com.entersekt.fido2.appdata.AwsomeApp
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
