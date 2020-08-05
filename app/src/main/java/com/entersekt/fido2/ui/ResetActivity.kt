@@ -1,7 +1,8 @@
-package com.entersekt.fido2
+package com.entersekt.fido2.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.entersekt.fido2.R
 import kotlinx.android.synthetic.main.activity_reset.*
 import java.io.DataInputStream
 import java.io.DataOutputStream

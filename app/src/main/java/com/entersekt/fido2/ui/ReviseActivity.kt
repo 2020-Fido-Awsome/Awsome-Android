@@ -1,14 +1,13 @@
 package com.entersekt.fido2
 
-import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.entersekt.fido2.R
+import com.entersekt.fido2.appdata.DataManage
 import com.entersekt.fido2.data.AwsomeApp
-import com.entersekt.fido2.data.DataManage
 import kotlinx.android.synthetic.main.activity_host.btn_back
 import kotlinx.android.synthetic.main.activity_revise.*
 import java.io.DataInputStream
@@ -31,7 +30,6 @@ class ReviseActivity : AppCompatActivity() {
     var ssid = ""
     var pwd = ""
 
-    //var sharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
     var editor = DataManage.pref.edit()
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -69,7 +67,6 @@ class ReviseActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
 
-
                 }else{
                     Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
@@ -86,7 +83,7 @@ class ReviseActivity : AppCompatActivity() {
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = "aa/changeinfo/${ssid}/${pwd}"
+                msg = "${DataManage.macAddress}/changeinfo/${ssid}/${pwd}"
 
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 

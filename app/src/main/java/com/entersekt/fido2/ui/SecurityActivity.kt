@@ -1,7 +1,8 @@
-package com.entersekt.fido2
+package com.entersekt.fido2.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.entersekt.fido2.R
 import kotlinx.android.synthetic.main.activity_security.*
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -85,7 +86,7 @@ class SecurityActivity : AppCompatActivity() {
                 var dataArr = ByteArray(1024) // 1024만큼 데이터 받기
                 readSocket.read(dataArr) // byte array에 데이터를 씁니다.
                 data = String(dataArr)// 서버에서 보내준 한 줄 전체 - 쓰레기값 지움
-                println("data : ${data}")
+                println("data : $data")
 
             } catch (e: Exception) {    //연결 실패
                 socket.close()
@@ -137,7 +138,7 @@ class SecurityActivity : AppCompatActivity() {
     }
 
     private fun setStatus() {
-        println("data!!!! : ${data}")
+        println("data!!!! : $data")
 
         act_sec_switch_arp_spoofing.isChecked = (data.split(',')[1] == "on")
         act_sec_switch_syn_flooding.isChecked = (data.split(',')[2] == "on")

@@ -19,7 +19,7 @@ object DataManage{
         get() = pref.getString("MAC", "00:00:00:00:00:00")
         set(value) = pref.edit{
             it.putString("MAC", value)?.apply()
-        }
+        }!!
 
     /* get/set 함수 임의 설정. get 실행 시 저장된 값을 반환하며 default 값은 ""
      * set(value) 실행 시 value로 값을 대체한 후 저장 */
