@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.entersekt.fido2.R
 import com.entersekt.fido2.appdata.AwsomeApp
 import com.entersekt.fido2.appdata.DataManage
-import com.entersekt.fido2.ui.SecurityActivity
 import kotlinx.android.synthetic.main.activity_host.btn_back
 import kotlinx.android.synthetic.main.activity_revise.*
 import java.io.DataInputStream

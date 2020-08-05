@@ -18,6 +18,10 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity android:name=".ui.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.InformationActivity" />
         <activity android:name=".activity_host.HostActivity" />
@@ -25,7 +29,10 @@
         <activity android:name=".ui.LogActivity" />
         <activity android:name=".ui.ReviseActivity" />
         <activity android:name=".ui.StartActivity" />
-        <activity android:name=".CreateActivity" />
+        <activity android:name=".ui.CreateActivity"/>
+        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"/>
         <activity android:name=".ui.AuthnActivity">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
@@ -46,15 +53,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity_admin.AdminActivity" />
-        <activity android:name=".SecurityActivity" />
-        <activity android:name=".MainActivity"/>
         <activity android:name=".ui.SecurityActivity" />
-        <activity android:name=".ui.MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+        <activity android:name=".ui.MainActivity"/>
+\</application>
 
 </manifest>

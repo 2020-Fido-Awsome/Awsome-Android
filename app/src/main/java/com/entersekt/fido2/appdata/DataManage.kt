@@ -15,10 +15,22 @@ object DataManage{
         pref = context.getSharedPreferences("pref", Context.MODE_PRIVATE)
     }
 
-    var macAddress: String?
+    var mac: String? // 찐맥주소
         get() = pref.getString("MAC", "00:00:00:00:00:00")
         set(value) = pref.edit{
             it.putString("MAC", value)?.apply()
+        }!!
+
+    var nickName: String?
+        get() = pref.getString("nick", "")
+        set(value) = pref.edit{
+            it.putString("nick", value)?.apply()
+        }!!
+
+    var macAddress: String? // **sha256으로 저장한 nick+mac/setinfo/usernick 임**
+        get() = pref.getString("shaInfo", "/setinfo/usernick")
+        set(value) = pref.edit{
+            it.putString("shaInfo", value)?.apply()
         }!!
 
     /* get/set 함수 임의 설정. get 실행 시 저장된 값을 반환하며 default 값은 ""

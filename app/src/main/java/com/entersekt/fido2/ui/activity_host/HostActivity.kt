@@ -36,7 +36,7 @@ class HostActivity : AppCompatActivity() {
         setContentView(R.layout.activity_host)
         datas.clear()
 
-        println(DataManage.macAddress)
+        println(DataManage.mac)
 
         btn_back.setOnClickListener {
 //            HostDisconnect().start()

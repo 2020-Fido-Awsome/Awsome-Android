@@ -37,7 +37,7 @@ class InformationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_information)
 
 
-        println(DataManage.macAddress)
+        println(DataManage.mac)
 
         Connect().start()
         btn_editpw.setOnClickListener {

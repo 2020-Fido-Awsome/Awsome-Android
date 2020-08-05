@@ -1,10 +1,10 @@
-package com.entersekt.fido2
+package com.entersekt.fido2.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.entersekt.fido2.ui.SignupActivity
+import com.entersekt.fido2.R
 import com.google.zxing.integration.android.IntentIntegrator
 
 
@@ -29,12 +29,18 @@ class CreateActivity : AppCompatActivity() {
         val result =
             IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
-            if (result.contents == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+            if (result.contents == null || result.contents != "WIFI:S:AWS;T:WPA;P:awsfido2020!;;") {
+                Toast.makeText(this, "인증실패", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, StartActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent)
+                finish()
+            }
+            else {
+                //Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "인증성공", Toast.LENGTH_LONG).show()
                 val intent = Intent(this, SignupActivity::class.java)
-
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
