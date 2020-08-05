@@ -1,15 +1,20 @@
 package com.entersekt.fido2
 
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.entersekt.fido2.data.AwsomeApp
+import com.entersekt.fido2.data.DataManage
 import kotlinx.android.synthetic.main.activity_host.btn_back
 import kotlinx.android.synthetic.main.activity_revise.*
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
-import com.entersekt.fido2.KeyStore.Companion
+import java.util.*
 
 
 class ReviseActivity : AppCompatActivity() {
@@ -26,6 +31,10 @@ class ReviseActivity : AppCompatActivity() {
     var ssid = ""
     var pwd = ""
 
+    //var sharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
+    var editor = DataManage.pref.edit()
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_revise)
@@ -44,19 +53,22 @@ class ReviseActivity : AppCompatActivity() {
                     ssid = txt_newSsid.text.toString()
                     pwd = txt_pwd.text.toString()
 
-                    KeyStore.wp = KeyStore.encryptData(pwd)
-                    KeyStore.ws = KeyStore.encryptData(ssid)
+
+                    var temPw = AwsomeApp.encryptData(pwd)
+
+                    editor.putString("ws", ssid)
+                    editor.putString("wp1" , Base64.getEncoder().encodeToString(temPw.first))
+                    editor.putString("wp2", Base64.getEncoder().encodeToString(temPw.second))
+                    editor.commit()
+
 
                     Connect(ssid, pwd).start()
 
-//                    val intent = Intent(this, InformationActivity::class.java)
-//                    intent.putExtra("username", ssid)
-//                    startActivity(intent)
-//                    finish()
-
-                    val intent = Intent(this, QrActivity::class.java)
+                    val intent = Intent(this, InformationActivity::class.java)
+                    intent.putExtra("username", ssid)
                     startActivity(intent)
                     finish()
+
 
                 }else{
                     Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
@@ -74,7 +86,7 @@ class ReviseActivity : AppCompatActivity() {
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = "changeinfo/${ssid}/${pwd}"
+                msg = "aa/changeinfo/${ssid}/${pwd}"
 
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 

@@ -15,7 +15,6 @@ import com.entersekt.fido2.data.DataManage
 import kotlinx.android.synthetic.main.activity_main.*
 import java.net.NetworkInterface
 import java.util.*
-import com.entersekt.fido2.KeyStore.Companion
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,29 +53,6 @@ class MainActivity : AppCompatActivity() {
 
         val macAddress = getMACAddress("wlan0")
         DataManage.macAddress = macAddress
-
-
-
-        println("################dddd#########3")
-
-//        try {
-//            var a = KeyStore.exist
-//            println("~~~~~~~~~~~~~~~~~~")
-//        } catch (e:ExceptionInInitializerError){ // NoClassDefFoundError
-//            println("@@@@${KeyStore.exist}@@@@")
-//        }
-
-        println("@@@@${KeyStore.exist}@@@@")
-        if (KeyStore.exist) {
-            KeyStore.genKey()
-            KeyStore.exist = true
-            println("****${KeyStore.exist}****")
-        }
-
-
-
-
-
 
     }
     var lastTimeBackPressed:Long = 0
