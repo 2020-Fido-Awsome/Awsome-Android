@@ -29,7 +29,8 @@ class CreateActivity : AppCompatActivity() {
         val result =
             IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
-            if (result.contents == null || result.contents != "WIFI:S:AWS;T:WPA;P:awsfido2020!;;") {
+            if (result.contents == null || result.contents != "WIFI:S:AWS;T:WPA;P:awsfido2020!;;" || result.contents != "Awsome FIDO Alliance, Good Bye Password!\n" +
+                "Please give first place to AWS team.") {
                 Toast.makeText(this, "인증실패", Toast.LENGTH_LONG).show()
                 val intent = Intent(this, StartActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

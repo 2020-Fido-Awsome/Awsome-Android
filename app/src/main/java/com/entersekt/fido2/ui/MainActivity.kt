@@ -15,9 +15,12 @@ import com.entersekt.fido2.ui.ResetActivity
 import com.entersekt.fido2.ui.SecurityActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.net.NetworkInterface
+import java.security.MessageDigest
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    var editor = DataManage.pref.edit()
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +55,8 @@ class MainActivity : AppCompatActivity() {
 
 
         val macAddress = getMACAddress("wlan0")
-        DataManage.macAddress = macAddress
+        //DataManage.macAddress = macAddress
+        editor.putString("mac", macAddress)
 
     }
 
@@ -84,6 +88,5 @@ class MainActivity : AppCompatActivity() {
         } // for now eat exceptions
         return ""
     }
-
 
 }

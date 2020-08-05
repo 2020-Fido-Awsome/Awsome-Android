@@ -3,13 +3,18 @@ package com.entersekt.fido2.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.entersekt.fido2.R
+import com.entersekt.fido2.appdata.AwsomeApp
+import com.entersekt.fido2.appdata.DataManage
 import kotlinx.android.synthetic.main.activity_security.*
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
+import java.util.*
 
 
 class SecurityActivity : AppCompatActivity() {
+
+    var str = ""
 
     companion object {
         var socket = Socket()
@@ -103,18 +108,18 @@ class SecurityActivity : AppCompatActivity() {
                 readSocket = DataInputStream(socket.getInputStream())
 
                 when (con) {
-                    0 -> msg = "offarp"
-                    1 -> msg = "onarp"
-                    2 -> msg = "offsyn"
-                    3 -> msg = "onsyn"
-                    4 -> msg = "offdos"
-                    5 -> msg = "ondos"
-                    6 -> msg = "offdns"
-                    7 -> msg = "ondns"
-                    8 -> msg = "offcmd"
-                    9 -> msg = "oncmd"
-                    10 -> msg = "offqr"
-                    11 -> msg = "onqr"
+                    0 -> msg = DataManage.macAddress.plus("/offarp")
+                    1 -> msg = DataManage.macAddress.plus("/onarp")
+                    2 -> msg = DataManage.macAddress.plus("/offsyn")
+                    3 -> msg = DataManage.macAddress.plus("/onsyn")
+                    4 -> msg = DataManage.macAddress.plus("/offdos")
+                    5 -> msg = DataManage.macAddress.plus("/ondos")
+                    6 -> msg = DataManage.macAddress.plus("/offdns")
+                    7 -> msg = DataManage.macAddress.plus("/ondns")
+                    8 -> msg = DataManage.macAddress.plus("/offcmd")
+                    9 -> msg = DataManage.macAddress.plus("/oncmd")
+                    10 -> msg = DataManage.macAddress.plus("/offqr")
+                    11 -> msg = DataManage.macAddress.plus("/onqr/").plus(genRandom())
                 }
 //                msg = if(con == 1){"onarp"}else "offarp"
 
@@ -123,6 +128,24 @@ class SecurityActivity : AppCompatActivity() {
             } catch (e: Exception) {    //연결 실패
                 socket.close()
             }
+        }
+
+        private fun genRandom() :String {
+            var random = Random()
+            var str = ""
+
+            str = str.plus((random.nextInt()+random.nextFloat()).toString())
+            str = str.plus((random.nextInt()+random.nextFloat()).toString())
+//        for(i in 1..10) {
+//            str = str.plus((random.nextInt()+random.nextFloat()).toString())
+//        }
+
+            var editor = DataManage.pref.edit()
+            var temPw = AwsomeApp.encryptData(str)
+            editor.putString("wp1" , Base64.getEncoder().encodeToString(temPw.first))
+            editor.putString("wp2", Base64.getEncoder().encodeToString(temPw.second))
+
+            return str
         }
     }
 

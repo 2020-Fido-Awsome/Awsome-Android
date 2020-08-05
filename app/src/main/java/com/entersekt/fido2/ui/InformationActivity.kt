@@ -81,7 +81,7 @@ class InformationActivity : AppCompatActivity() {
 
 
         //var wifiPw = "awsome2020!"
-        println("ssid: $ssid, pw: $wifiPw")
+        //println("ssid: $ssid, pw: $wifiPw")
 
         var text = "WIFI:S:".plus(ssid).plus(";T:WPA;P:").plus(wifiPw).plus(";;")
 

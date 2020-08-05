@@ -1,5 +1,6 @@
 package com.entersekt.fido2.activity_admin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,7 +8,11 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.entersekt.fido2.R
 import com.entersekt.fido2.activity_admin.AdminAdapter
 import com.entersekt.fido2.activity_admin.AdminData
+import com.entersekt.fido2.activity_host.HostActivity
+import com.entersekt.fido2.ui.SecurityActivity
 import kotlinx.android.synthetic.main.activity_admin.*
+import kotlinx.android.synthetic.main.activity_admin.btn_back
+import kotlinx.android.synthetic.main.activity_security.*
 
 class AdminActivity : AppCompatActivity() {
 
@@ -20,6 +25,11 @@ class AdminActivity : AppCompatActivity() {
 
         btn_back.setOnClickListener {
             finish()
+        }
+
+        fab.setOnClickListener {
+            val intent = Intent(this, CertifyActivity::class.java)
+            startActivity(intent)
         }
 
         adminAdapter = AdminAdapter(this)
