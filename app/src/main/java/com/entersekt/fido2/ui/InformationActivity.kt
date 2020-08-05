@@ -1,4 +1,4 @@
-package com.entersekt.fido2
+package com.entersekt.fido2.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,8 @@ import android.os.Looper
 import android.os.Message
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.entersekt.fido2.data.AwsomeApp
-import com.entersekt.fido2.data.DataManage
+import com.entersekt.fido2.R
+import com.entersekt.fido2.appdata.DataManage
 import kotlinx.android.synthetic.main.activity_information.*
 import kotlinx.android.synthetic.main.activity_revise.btn_back
 import java.io.DataInputStream
