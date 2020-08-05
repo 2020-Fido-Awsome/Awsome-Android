@@ -1,4 +1,4 @@
-package com.entersekt.fido2
+package com.entersekt.fido2.ui
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.entersekt.fido2.R
 import com.entersekt.fido2.fragment_log.LogAdapter
 import com.entersekt.fido2.fragment_log.active.ActiveFragment
 import com.entersekt.fido2.fragment_log.security.SecurityFragment

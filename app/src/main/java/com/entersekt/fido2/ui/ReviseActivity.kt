@@ -1,9 +1,11 @@
-package com.entersekt.fido2
+package com.entersekt.fido2.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.entersekt.fido2.R
+import com.entersekt.fido2.appdata.DataManage
 import kotlinx.android.synthetic.main.activity_host.btn_back
 import kotlinx.android.synthetic.main.activity_revise.*
 import java.io.DataInputStream
@@ -65,7 +67,7 @@ class ReviseActivity : AppCompatActivity() {
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = "changeinfo/${ssid}/${pwd}"
+                msg = "${DataManage.macAddress}/changeinfo/${ssid}/${pwd}"
 
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 

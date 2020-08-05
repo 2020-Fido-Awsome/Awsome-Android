@@ -1,4 +1,4 @@
-package com.entersekt.fido2
+package com.entersekt.fido2.ui
 
 import android.content.Intent
 import android.content.IntentSender
@@ -9,9 +9,18 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import com.entersekt.fido2.R
+import com.entersekt.fido2.data.DefaultData
+import com.entersekt.fido2.retrofit.ConnectServiceImpl
 import com.google.android.gms.fido.Fido
 import com.google.android.gms.fido.fido2.api.common.*
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_resist.*
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.security.SecureRandom
 
 
@@ -92,6 +101,7 @@ class ResistActivity : AppCompatActivity() {
         val fido2ApiClient = Fido.getFido2ApiClient(applicationContext)
         val fido2PendingIntentTask = fido2ApiClient.getRegisterIntent(options) // getRegisterPendingIntent
 
+        connect()
 //        fido2PendingIntentTask.addOnSuccessListener (
 //             OnSuccessListener() {
 //                @Override
@@ -176,8 +186,6 @@ class ResistActivity : AppCompatActivity() {
         //원래 코드 : resultText.text = registerFidoResult
 
         resultText.text = registerFidoResult
-
-
 
     }
 
@@ -266,8 +274,44 @@ class ResistActivity : AppCompatActivity() {
     }
 
     private fun loadKeyHandle(): ByteArray? {
-        val keyHandleBase64 = PreferenceManager.getDefaultSharedPreferences(this).getString(KEY_HANDLE_PREF, null)
+        val keyHandleBase64 = PreferenceManager.getDefaultSharedPreferences(this).getString(
+            KEY_HANDLE_PREF, null)
             ?: return null
         return Base64.decode(keyHandleBase64, Base64.DEFAULT)
+    }
+
+    fun connect(){
+        //userId":null,"deviceId":null,"transactionId":null,"username":"12480","displayName":"12480","authenticatorSelection":null,"attestation":null,"extension":null
+
+        val ConnectJsonData = JSONObject()
+//        ConnectJsonData.put("userId", "null")
+//        ConnectJsonData.put("deviceId", "null")
+//        ConnectJsonData.put("transactionId", "null")
+//        ConnectJsonData.put("username", "test")
+//        ConnectJsonData.put("displayName", "test")
+//        ConnectJsonData.put("authenticatorSelection", "null")
+//        ConnectJsonData.put("attestation", "null")
+//        ConnectJsonData.put("extension", "null")
+        ConnectJsonData.put("userId", "123")
+        ConnectJsonData.put("password", "1234567890")
+        ConnectJsonData.put("loginCounter", 0)
+
+        val body = JsonParser.parseString(ConnectJsonData.toString()) as JsonObject
+
+        Log.e("보내는 Body", body.toString())
+
+        ConnectServiceImpl.service.getSignIn(body).enqueue(object : Callback<DefaultData>{
+            override fun onFailure(call: Call<DefaultData>, t: Throwable) {
+                //통신 실패
+                Log.e("통신 실패", "통신 실패닷 이눔아")
+            }
+
+            override fun onResponse(call: Call<DefaultData>, response: Response<DefaultData>) {
+                //통신은 어쩌고 성공
+                Log.e("통신 성공", "통신은 어쩌고 성공 ${response.body().toString()}")
+            }
+
+        })
+
     }
 }

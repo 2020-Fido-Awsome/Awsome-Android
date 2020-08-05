@@ -1,4 +1,4 @@
-package com.entersekt.fido2
+package com.entersekt.fido2.ui
 
 import android.content.Intent
 import android.content.IntentSender
@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Base64
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import com.entersekt.fido2.R
 import com.google.android.gms.fido.Fido
 import com.google.android.gms.fido.fido2.api.common.*
 import kotlinx.android.synthetic.main.activity_authn.*
@@ -146,8 +146,6 @@ class AuthnActivity : AppCompatActivity() {
         resultText.text = registerFidoResult
 
 
-
-
     }
 
     /**
@@ -176,7 +174,7 @@ class AuthnActivity : AppCompatActivity() {
 
         resultText.text = registerFido2Result
 
-        var intent = Intent(this, AuthnActivity::class.java);
+//        var intent = Intent(this, AuthnActivity::class.java);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -233,7 +231,8 @@ class AuthnActivity : AppCompatActivity() {
     }
 
     private fun loadKeyHandle(): ByteArray? {
-        val keyHandleBase64 = PreferenceManager.getDefaultSharedPreferences(this).getString(KEY_HANDLE_PREF, null)
+        val keyHandleBase64 = PreferenceManager.getDefaultSharedPreferences(this).getString(
+            KEY_HANDLE_PREF, null)
             ?: return null
         return Base64.decode(keyHandleBase64, Base64.DEFAULT)
     }

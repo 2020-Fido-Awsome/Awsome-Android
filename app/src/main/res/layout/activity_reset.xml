@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResetActivity">
+    tools:context=".ui.ResetActivity">
 
     <TextView
         android:id="@+id/textView2"
@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
         android:layout_marginEnd="140dp"
-        android:text="초기화를 진행합니다."
+        android:gravity="center_horizontal"
+        android:text="초기화를 진행합니다.\n 등록된 모든 관리자 정보 또한 삭제됩니다."
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

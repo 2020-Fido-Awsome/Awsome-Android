@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.entersekt.fido2.ui.SignupActivity
 import com.google.zxing.integration.android.IntentIntegrator
 
 

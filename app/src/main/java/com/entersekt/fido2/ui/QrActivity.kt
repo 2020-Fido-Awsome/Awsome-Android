@@ -1,8 +1,8 @@
-package com.entersekt.fido2
+package com.entersekt.fido2.ui
 
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.entersekt.fido2.R
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
