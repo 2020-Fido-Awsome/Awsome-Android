@@ -1,19 +1,23 @@
 package com.entersekt.fido2.ui
 
+import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
+import android.os.*
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.entersekt.fido2.R
 import com.entersekt.fido2.appdata.DataManage
+import com.entersekt.fido2.appdata.AwsomeApp
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import kotlinx.android.synthetic.main.activity_information.*
 import kotlinx.android.synthetic.main.activity_revise.btn_back
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
+import java.util.Base64
 
 class InformationActivity : AppCompatActivity() {
 
@@ -27,10 +31,10 @@ class InformationActivity : AppCompatActivity() {
         var msg = "0"
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
-
 
         Connect().start()
         btn_editpw.setOnClickListener {
@@ -61,6 +65,33 @@ class InformationActivity : AppCompatActivity() {
             }
         }
 
+        var sharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
+
+        var ssid = sharedPreferences.getString("ws", "AWS")
+        // Base64.getDecoder().decode(encodedString)
+        //var wp1 = sharedPreferences.getString("wp1", DataManage.iniPw1).toByteArray(Charsets.UTF_8)
+        //var wp2 = sharedPreferences.getString("wp2", DataManage.iniPw1).toByteArray(Charsets.UTF_8)
+        var wp1 = Base64.getDecoder().decode(sharedPreferences.getString("wp1", DataManage.iniPw1))
+        var wp2 = Base64.getDecoder().decode(sharedPreferences.getString("wp2", DataManage.iniPw2))
+
+        var wifiPw = AwsomeApp.decryptData(wp1, wp2)
+
+
+        //var wifiPw = "awsome2020!"
+        println("ssid: $ssid, pw: $wifiPw")
+
+        var text = "WIFI:S:".plus(ssid).plus(";T:WPA;P:").plus(wifiPw).plus(";;")
+
+        val multiFormatWriter = MultiFormatWriter()
+        try {
+            val bitMatrix =
+                multiFormatWriter.encode(text, BarcodeFormat.QR_CODE, 200, 200)
+            val barcodeEncoder = BarcodeEncoder()
+            val bitmap = barcodeEncoder.createBitmap(bitMatrix)
+            qrcode.setImageBitmap(bitmap)
+        } catch (e: Exception) {
+        }
+
     }
 
     //비동기 소켓통신
@@ -73,6 +104,7 @@ class InformationActivity : AppCompatActivity() {
                 readSocket = DataInputStream(socket.getInputStream())
 
                 msg = "${DataManage.macAddress}/routerinfo"
+
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
                 var dataArr = ByteArray(1024) // 1024만큼 데이터 받기

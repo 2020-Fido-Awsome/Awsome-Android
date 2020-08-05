@@ -13,13 +13,16 @@ class SplashActivity : AppCompatActivity() {
 
     val SPLASH_VIEW_TIME: Long = 2000 //2초간 스플래시 화면을 보여줌 (ms)
 
+    var editor = DataManage.pref.edit()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_splash)
 
         val macAddress = getMACAddress("wlan0")
-        DataManage.macAddress = macAddress
+        //DataManage.macAddress = macAddress
+        editor.putString("mac", macAddress)
 
         Handler().postDelayed({ //delay를 위한 handler
             startActivity(Intent(this, StartActivity::class.java))

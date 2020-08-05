@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_store.*
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
+import java.security.MessageDigest
 
 class SignupActivity : AppCompatActivity() {
 
@@ -23,6 +24,8 @@ class SignupActivity : AppCompatActivity() {
     }
 
     var usernick = ""
+    var tempSha = ""
+    var editor = DataManage.pref.edit()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,10 @@ class SignupActivity : AppCompatActivity() {
                     }
                     else {
                         usernick = editTextTextPersonName.text.toString()
+                        editor.putString("nick", usernick)
+
+                        tempSha = DataManage.mac.toString().plus(usernick).plus("/setinfo/usernick")
+                        editor.putString("shaInfo", shaEncrypt(tempSha))
 
                         val intent = Intent(this, ResistActivity::class.java)
                         intent.putExtra("nick", usernick)
@@ -77,6 +84,15 @@ class SignupActivity : AppCompatActivity() {
 
         }
     }
+
+    fun shaEncrypt(data: String) : String{
+        val strHash = MessageDigest.getInstance("SHA-256")
+            .digest(data.toByteArray())
+            .joinToString(separator = "") {
+                "%02x".format(it)
+            }
+        return strHash
+         }
 
 //    class StoreDisconnect:Thread(){
 //        override fun run() {

@@ -29,7 +29,10 @@
         <activity android:name=".ui.LogActivity" />
         <activity android:name=".ui.ReviseActivity" />
         <activity android:name=".ui.StartActivity" />
-        <activity android:name=".CreateActivity" />
+        <activity android:name=".ui.CreateActivity"/>
+        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"/>
         <activity android:name=".ui.AuthnActivity">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
@@ -51,10 +54,9 @@
         </activity>
         <activity android:name=".activity_admin.AdminActivity" />
         <activity android:name=".ui.SecurityActivity" />
-        <activity android:name=".ui.MainActivity" >
-
-        </activity>
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.QrActivity"/>
     </application>
+
 
 </manifest>

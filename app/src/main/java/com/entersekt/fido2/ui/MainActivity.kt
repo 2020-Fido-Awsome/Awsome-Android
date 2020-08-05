@@ -1,17 +1,25 @@
 package com.entersekt.fido2.ui
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.entersekt.fido2.R
 import com.entersekt.fido2.activity_admin.AdminActivity
 import com.entersekt.fido2.activity_host.HostActivity
+import com.entersekt.fido2.appdata.DataManage
+import com.entersekt.fido2.ui.LogActivity
+import com.entersekt.fido2.ui.ResetActivity
+import com.entersekt.fido2.ui.SecurityActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.net.NetworkInterface
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,7 +50,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//        DataManage.macAddress = "123123123"
+
+        val macAddress = getMACAddress("wlan0")
+        DataManage.macAddress = macAddress
 
     }
 
@@ -55,5 +65,25 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun getMACAddress(interfaceName: String?): String {
+        try {
+            val interfaces: List<NetworkInterface> =
+                Collections.list(NetworkInterface.getNetworkInterfaces())
+            for (intf in interfaces) {
+                if (interfaceName != null) {
+                    if (!intf.name.equals(interfaceName, ignoreCase = true)) continue
+                }
+                val mac: ByteArray = intf.hardwareAddress ?: return ""
+                val buf = StringBuilder()
+                for (idx in mac.indices) buf.append(String.format("%02X:", mac[idx]))
+                if (buf.length > 0) buf.deleteCharAt(buf.length - 1)
+                return buf.toString()
+            }
+        } catch (ex: Exception) {
+        } // for now eat exceptions
+        return ""
+    }
+
 
 }

@@ -3,19 +3,35 @@ package com.entersekt.fido2.appdata
 import android.content.Context
 import android.content.SharedPreferences
 import java.util.*
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.entersekt.fido2.appdata.AwsomeApp
+
 
 object DataManage{
+    ///private lateinit var pref: SharedPreferences
     lateinit var pref: SharedPreferences
-
     fun init(context: Context) {
         pref = context.getSharedPreferences("pref", Context.MODE_PRIVATE)
     }
 
-    var macAddress: String?
+    var mac: String? // 찐맥주소
         get() = pref.getString("MAC", "00:00:00:00:00:00")
         set(value) = pref.edit{
             it.putString("MAC", value)?.apply()
-        }
+        }!!
+
+    var nickName: String?
+        get() = pref.getString("nick", "")
+        set(value) = pref.edit{
+            it.putString("nick", value)?.apply()
+        }!!
+
+    var macAddress: String? // **sha256으로 저장한 nick+mac/setinfo/usernick 임**
+        get() = pref.getString("shaInfo", "/setinfo/usernick")
+        set(value) = pref.edit{
+            it.putString("shaInfo", value)?.apply()
+        }!!
 
     var key_handle: String?
         get() = pref.getString("key_handle", "---")
@@ -35,4 +51,31 @@ object DataManage{
         operation(editor)
         editor.apply()
     }
+
+
+
+// ssid, pw값
+    var ws: String?
+        get() = pref.getString("ws", "AWS")
+        set(value) = pref.edit{
+            it.putString("ws", value)?.apply()
+        }
+
+    var iniPw = AwsomeApp.encryptData("awsfido2020!")
+    @RequiresApi(Build.VERSION_CODES.O)
+    var iniPw1 = Base64.getEncoder().encodeToString(iniPw.first)
+    @RequiresApi(Build.VERSION_CODES.O)
+    var iniPw2 = Base64.getEncoder().encodeToString(iniPw.second)
+
+    var wp1: String?
+        get() = pref.getString("wp1", iniPw1)
+        set(value) = pref.edit{
+            it.putString("wp1", value)?.apply()
+        }
+
+    var wp2: String?
+        get() = pref.getString("wp2", iniPw2)
+        set(value) = pref.edit {
+            it.putString("wp2", value)?.apply()
+        }
 }

@@ -4,9 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.entersekt.fido2.CreateActivity
 import com.entersekt.fido2.R
-import com.entersekt.fido2.appdata.DataManage
 import kotlinx.android.synthetic.main.activity_sign.*
 
 class StartActivity : AppCompatActivity() {
