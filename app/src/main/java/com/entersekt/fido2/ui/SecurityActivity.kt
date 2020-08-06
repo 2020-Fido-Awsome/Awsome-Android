@@ -1,9 +1,9 @@
 package com.entersekt.fido2.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.entersekt.fido2.R
-import com.entersekt.fido2.activity_host.HostActivity
 import com.entersekt.fido2.appdata.DataManage
 import com.entersekt.fido2.appdata.AwsomeApp
 import kotlinx.android.synthetic.main.activity_security.*
@@ -19,7 +19,8 @@ import java.util.*
 
 class SecurityActivity : AppCompatActivity() {
 
-    var str = ""
+    lateinit var str:String
+
 
     companion object {
         var socket = Socket()
@@ -34,6 +35,8 @@ class SecurityActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_security)
+
+        str = ""
 
 //        StartConnect().start()
 
@@ -103,7 +106,12 @@ class SecurityActivity : AppCompatActivity() {
                     async(Dispatchers.IO) {
                         if (act_sec_switch_qr.isChecked) {
                             connect(11)
-                        } else connect(10)
+                            str = genRandom()
+                            Toast.makeText(this@SecurityActivity,"패스워드를 통한 Wifi 연결이 불가능합니다.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            connect(10)
+                            Toast.makeText(this@SecurityActivity,"Wifi 패스워드를 변경하여 주십시오.",Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
@@ -187,24 +195,6 @@ class SecurityActivity : AppCompatActivity() {
                 socket.close()
             }
         }
-
-        private fun genRandom() :String {
-            var random = Random()
-            var str = ""
-
-            str = str.plus((random.nextInt()+random.nextFloat()).toString())
-            str = str.plus((random.nextInt()+random.nextFloat()).toString())
-//        for(i in 1..10) {
-//            str = str.plus((random.nextInt()+random.nextFloat()).toString())
-//        }
-
-            var editor = DataManage.pref.edit()
-            var temPw = AwsomeApp.encryptData(str)
-            editor.putString("wp1" , Base64.getEncoder().encodeToString(temPw.first))
-            editor.putString("wp2", Base64.getEncoder().encodeToString(temPw.second))
-
-            return str
-        }
     }
 
 //    class SecurityDisconnect : Thread() {
@@ -248,11 +238,29 @@ class SecurityActivity : AppCompatActivity() {
             8 -> msg = "${DataManage.macAddress}/offcmd"
             9 -> msg = "${DataManage.macAddress}/oncmd"
             10 -> msg = "${DataManage.macAddress}/offqr"
-            11 -> msg = "${DataManage.macAddress}/onqr"
+            11 -> msg = "${DataManage.macAddress}/onqr/".plus(str)
         }
 
         writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
+    }
+
+    private fun genRandom() :String {
+        var random = Random()
+        var str = ""
+
+        str = str.plus((random.nextInt()+random.nextFloat()).toString())
+        str = str.plus((random.nextInt()+random.nextFloat()).toString())
+//        for(i in 1..10) {
+//            str = str.plus((random.nextInt()+random.nextFloat()).toString())
+//        }
+
+        var editor = DataManage.pref.edit()
+        var temPw = AwsomeApp.encryptData(str)
+        editor.putString("wp1" , Base64.getEncoder().encodeToString(temPw.first))
+        editor.putString("wp2", Base64.getEncoder().encodeToString(temPw.second))
+
+        return str
     }
 
 }
