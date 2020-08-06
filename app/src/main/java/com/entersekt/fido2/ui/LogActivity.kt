@@ -38,14 +38,6 @@ class LogActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) { //0, 1
-                Toast.makeText(this@LogActivity, position.toString(), Toast.LENGTH_SHORT).show()
-//
-//                if(position == 1){
-//                    activeFragment.onStart()
-//                }else{
-//                    securityFragment.onStart()
-//                }
-
             }
         })
 

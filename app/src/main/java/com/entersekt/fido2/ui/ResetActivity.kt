@@ -3,6 +3,7 @@ package com.entersekt.fido2.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.entersekt.fido2.R
+import com.entersekt.fido2.appdata.DataManage
 import kotlinx.android.synthetic.main.activity_reset.*
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -45,7 +46,7 @@ class ResetActivity : AppCompatActivity() {
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = if(con == 1){"restart"}else "reset"
+                msg = if(con == 1){"${DataManage.macAddress}/restart"}else "${DataManage.macAddress}/reset"
 
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 

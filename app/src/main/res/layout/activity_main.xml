@@ -8,13 +8,15 @@
 
 
     <TextView
-        android:id="@+id/txt_User"
+        android:id="@+id/txt_ssid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="AWS WIFI"
-        android:textColor="#505050"
-        android:textSize="24sp"
+        android:textColor="@color/greyish_brown"
+        android:textSize="25sp"
+        android:lineHeight="29sp"
+        android:fontFamily="@font/roboto_bold"
         app:layout_constraintStart_toStartOf="@+id/btn_Host"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,11 +26,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="연결되었습니다."
-        android:textColor="#314885"
-        android:textSize="24sp"
+        android:textColor="@color/light_navy_blue"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/txt_User"
-        app:layout_constraintTop_toBottomOf="@+id/txt_User" />
+        app:layout_constraintStart_toStartOf="@+id/txt_ssid"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ssid" />
 
     <Button
         android:id="@+id/btn_Host"

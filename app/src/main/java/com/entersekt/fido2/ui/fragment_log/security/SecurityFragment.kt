@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.entersekt.fido2.R
+import com.entersekt.fido2.appdata.DataManage
 import kotlinx.android.synthetic.main.fragment_security.*
 import kotlinx.coroutines.*
 import java.io.DataInputStream
@@ -21,7 +22,7 @@ class SecurityFragment : Fragment() {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
-        var ip = "172.20.10.2"  //서버 ip
+        var ip = "192.168.0.254"  //서버 ip
         var port = 9999
         var msg = "0"
         var cnt = 0
@@ -67,7 +68,7 @@ class SecurityFragment : Fragment() {
         writeSocket = DataOutputStream(socket.getOutputStream())
         readSocket = DataInputStream(socket.getInputStream())
 
-        msg = "security_log"
+        msg = "${DataManage.macAddress}/security_log"
         writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
         var dataArr = ByteArray(1024) // 1024만큼 데이터 받기

@@ -22,7 +22,7 @@ class HostActivity : AppCompatActivity() {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
-        var ip = "172.20.10.2"  //서버 ip
+        var ip = "192.168.0.254"  //서버 ip
         var port = 9999
         var msg = "0"
         var cnt = 0
@@ -120,7 +120,7 @@ class HostActivity : AppCompatActivity() {
         writeSocket = DataOutputStream(socket.getOutputStream())
         readSocket = DataInputStream(socket.getInputStream())
 
-        msg = "list"
+        msg = "${DataManage.macAddress}/list"
         writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
         var dataArr = ByteArray(1024) // 1024만큼 데이터 받기

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activity_host.HostActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,6 +32,7 @@
             android:gravity="center_horizontal"
             android:text="공유기 이용정보 확인"
             android:textSize="16sp"
+            android:fontFamily="@font/roboto_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +46,6 @@
         android:layout_width="340dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_bar"

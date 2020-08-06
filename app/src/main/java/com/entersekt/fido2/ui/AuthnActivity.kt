@@ -40,12 +40,12 @@ class AuthnActivity : AppCompatActivity() {
             RESULT_OK -> {
                 data?.let {
                     if (it.hasExtra(Fido.FIDO2_KEY_ERROR_EXTRA)) {
-                        handleErrorResponse(data.getByteArrayExtra(Fido.FIDO2_KEY_ERROR_EXTRA))
+                        handleErrorResponse(data.getByteArrayExtra(Fido.FIDO2_KEY_ERROR_EXTRA)!!)
                     } else if (it.hasExtra(Fido.FIDO2_KEY_RESPONSE_EXTRA)) {
                         val fido2Response = data.getByteArrayExtra(Fido.FIDO2_KEY_RESPONSE_EXTRA)
                         when (requestCode) {
-                            REQUEST_CODE_REGISTER -> handleRegisterResponse(fido2Response)
-                            REQUEST_CODE_SIGN -> handleSignResponse(fido2Response)
+                            REQUEST_CODE_REGISTER -> handleRegisterResponse(fido2Response!!)
+                            REQUEST_CODE_SIGN -> handleSignResponse(fido2Response!!)
                         }
                     }
                 }
@@ -232,7 +232,7 @@ class AuthnActivity : AppCompatActivity() {
 
     private fun loadKeyHandle(): ByteArray? {
         val keyHandleBase64 = PreferenceManager.getDefaultSharedPreferences(this).getString(
-            KEY_HANDLE_PREF, null)
+            KEY_HANDLE_PREF, "null")
             ?: return null
         return Base64.decode(keyHandleBase64, Base64.DEFAULT)
     }

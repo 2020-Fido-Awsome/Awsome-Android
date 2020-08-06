@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.SecurityActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +31,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="보안기능 탐지 및 차단설정"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/greyish_brown"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +64,9 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="23dp"
                 android:text="ARP Spoofing 탐지"
-                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/greyish_brown"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,6 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginBottom="18dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/warm_grey"
                 android:text="공유기를 통해 전송되는 데이터를 탈취하고자 하는 공격을 탐지하는 기능"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +108,9 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="23dp"
                 android:text="SYN Flooding 탐지"
-                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/greyish_brown"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -111,6 +120,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginBottom="18dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/warm_grey"
                 android:text="비정상적인 데이터의 접근을 방지하고 정상적 접근을 도와주는 기능"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -141,7 +152,9 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="15dp"
                 android:text="DoS/DDoS 공격 탐지"
-                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/greyish_brown"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -151,6 +164,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginBottom="18dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/warm_grey"
                 android:text="네트워크 및 시스템의 마비를 탐지하고 정상운영을 도와주는 기능"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -181,7 +196,9 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="23dp"
                 android:text="DNS Spoofing 탐지"
-                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/greyish_brown"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -191,6 +208,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginBottom="18dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/warm_grey"
                 android:text="안전하지 못한 사이트로의 연결로 인한 개인정보 탈취 예방 기능"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -220,7 +239,9 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="23dp"
                 android:text="Command Injection 공격 탐지"
-                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/greyish_brown"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -231,6 +252,8 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="18dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/warm_grey"
                 android:text="공유기 관리자가 승인한 기기 외의 불법적 접근 탐지 기능  "
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -260,7 +283,9 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="23dp"
                 android:text="비밀번호 대신 QR코드 사용"
-                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/greyish_brown"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -270,6 +295,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginBottom="18dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/warm_grey"
                 android:text="취약한 비밀번호 대신 QR코드를 통해서만 Wifi에 연결할 수 있도록 하는 기능"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

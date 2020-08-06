@@ -33,7 +33,7 @@ class AdminActivity : AppCompatActivity() {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
-        var ip = "192.168.1.83"  //서버 ip
+        var ip = "192.168.0.254${DataManage.macAddress}"  //서버 ip
         var port = 9999
         var msg = "0"
         var cnt = 0
@@ -106,7 +106,7 @@ class AdminActivity : AppCompatActivity() {
         writeSocket = DataOutputStream(socket.getOutputStream())
         readSocket = DataInputStream(socket.getInputStream())
 
-        msg = "adminlist"
+        msg = "${DataManage.macAddress}/adminlist"
         writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
         var dataArr = ByteArray(1024) // 1024만큼 데이터 받기

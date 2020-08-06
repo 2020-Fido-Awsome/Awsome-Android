@@ -49,10 +49,10 @@ fun getUnsafeOkHttpClient(): OkHttpClient {
         val sslSocketFactory: javax.net.ssl.SSLSocketFactory = sslContext
             .socketFactory
         var okHttpClient = OkHttpClient()
-        okHttpClient = okHttpClient.newBuilder()
-            .sslSocketFactory(sslSocketFactory)
-            .hostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
-            .build()
+        okHttpClient = okHttpClient.newBuilder().apply {
+            sslSocketFactory(sslSocketFactory)
+//            .hostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+        }.build()
         okHttpClient
     } catch (e: Exception) {
         throw RuntimeException(e)
