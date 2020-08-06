@@ -52,10 +52,10 @@
                 <data android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_admin.AdminActivity"/>
+        <activity android:name=".activity_admin.AdminActivity" />
         <activity android:name=".activity_admin.CertifyActivity"/>
-        <activity android:name=".ui.SecurityActivity"/>
-        <activity android:name=".ui.MainActivity"/>
-</application>
+        <activity android:name=".ui.SecurityActivity" />
+        <activity android:name=".ui.MainActivity" />
+    </application>
 
 </manifest>

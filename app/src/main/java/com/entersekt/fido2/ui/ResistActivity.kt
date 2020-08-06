@@ -3,13 +3,12 @@ package com.entersekt.fido2.ui
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.edit
 import com.entersekt.fido2.R
+import com.entersekt.fido2.appdata.DataManage
 import com.entersekt.fido2.data.DefaultData
 import com.entersekt.fido2.retrofit.ConnectServiceImpl
 import com.google.android.gms.fido.Fido
@@ -31,6 +30,9 @@ class ResistActivity : AppCompatActivity() {
         private const val REQUEST_CODE_SIGN = 2
         private const val KEY_HANDLE_PREF = "key_handle"
     }
+
+
+    var editor = DataManage.pref.edit()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,15 +78,18 @@ class ResistActivity : AppCompatActivity() {
 
     private fun registerFido2() {
         // All the option parameters should come from the Relying Party / server
+        Log.e("Retrofit 통신 시작", "시작하라고")
+        connect()
+
         Log.e("registerFido2 실행실행", "실행 시작")
         val options = PublicKeyCredentialCreationOptions.Builder()
             .setRp(PublicKeyCredentialRpEntity("aws.eazysecure-auth.com", "Fido2Demo", null))
             .setUser(
                 PublicKeyCredentialUserEntity(
-                    "0803".toByteArray(),
-                    "0803",
-                    "0803",
-                    "0803"
+                    "jihyeon111".toByteArray(), //name
+                    "nothing", //icon
+                    "12341234", //id
+                    "ffff" //displayName
                 )
             )
             .setChallenge(challenge())
@@ -99,42 +104,17 @@ class ResistActivity : AppCompatActivity() {
             .build()
 
         val fido2ApiClient = Fido.getFido2ApiClient(applicationContext)
-        val fido2PendingIntentTask = fido2ApiClient.getRegisterIntent(options) // getRegisterPendingIntent
-
-        connect()
-//        fido2PendingIntentTask.addOnSuccessListener (
-//             OnSuccessListener() {
-//                @Override
-//                 fun onSuccess(pendingIntent : PendingIntent) {
-//                    if (pendingIntent != null) {
-//                        // Start a FIDO2 registration request.
-//                        Log.e("fido2PendingIntent","실행")
-//                        val activity = ResistActivity()
-//                        activity.startIntentSenderForResult(
-//                            pendingIntent.intentSender,
-//                            REQUEST_CODE_REGISTER,
-//                            null, // fillInIntent,
-//                            0, // flagsMask,
-//                            0, // flagsValue,
-//                            0 //extraFlags);
-//                        )
-//                    }
-//                }
-//            })
-//        fido2PendingIntentTask.addOnFailureListener(
-//             OnFailureListener() {
-//                @Override
-//                fun onFailure(e: Exception) {
-//                    // Fail
-//                }
-//            }
-//        )
+        val fido2PendingIntentTask =
+            fido2ApiClient.getRegisterIntent(options) // getRegisterPendingIntent
 
         fido2PendingIntentTask.addOnSuccessListener { fido2PendingIntent ->
             if (fido2PendingIntent.hasPendingIntent()) {
                 try {
                     Log.e("실행되라멍청아", "launching Fido2 Pending Intent")
-                    fido2PendingIntent.launchPendingIntent(this@ResistActivity, REQUEST_CODE_REGISTER)
+                    fido2PendingIntent.launchPendingIntent(
+                        this@ResistActivity,
+                        REQUEST_CODE_REGISTER
+                    )
                 } catch (e: IntentSender.SendIntentException) {
                     e.printStackTrace()
                 }
@@ -181,7 +161,8 @@ class ResistActivity : AppCompatActivity() {
         Log.e(LOG_TAG, "errorCode.name: $errorName")
         Log.e(LOG_TAG, "errorMessage: $errorMessage")
 
-        val registerFidoResult = "An Error Ocurred\n\nError Name:\n$errorName\n\nError Message:\n$errorMessage"
+        val registerFidoResult =
+            "An Error Ocurred\n\nError Name:\n$errorName\n\nError Message:\n$errorMessage"
 
         //원래 코드 : resultText.text = registerFidoResult
 
@@ -197,7 +178,8 @@ class ResistActivity : AppCompatActivity() {
         Log.e(LOG_TAG, "응답바디: $response")
         val keyHandleBase64 = Base64.encodeToString(response.keyHandle, Base64.DEFAULT)
         val clientDataJson = String(response.clientDataJSON, Charsets.UTF_8)
-        val attestationObjectBase64 = Base64.encodeToString(response.attestationObject, Base64.DEFAULT)
+        val attestationObjectBase64 =
+            Base64.encodeToString(response.attestationObject, Base64.DEFAULT)
 
         storeKeyHandle(response.keyHandle)
         //signFido2Button.isEnabled = true
@@ -215,11 +197,11 @@ class ResistActivity : AppCompatActivity() {
                 "$attestationObjectBase64\n"
 
         //회원가입 성공-소켓 통신 호출
-        SignupActivity.StoreConnect(intent.getStringExtra("nick")).start()
+        SignupActivity.StoreConnect(intent.getStringExtra("nick")!!).start()
 
         resultText.text = registerFido2Result
         Toast.makeText(this, "회원가입 성공했습니다", Toast.LENGTH_LONG).show()
-        var intent = Intent(this, StartActivity::class.java);
+        val intent = Intent(this, StartActivity::class.java);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -235,7 +217,8 @@ class ResistActivity : AppCompatActivity() {
         val response = AuthenticatorAssertionResponse.deserializeFromBytes(fido2Response)
         val keyHandleBase64 = Base64.encodeToString(response.keyHandle, Base64.DEFAULT)
         val clientDataJson = String(response.clientDataJSON, Charsets.UTF_8)
-        val authenticatorDataBase64 = Base64.encodeToString(response.authenticatorData, Base64.DEFAULT)
+        val authenticatorDataBase64 =
+            Base64.encodeToString(response.authenticatorData, Base64.DEFAULT)
         val signatureBase64 = Base64.encodeToString(response.signature, Base64.DEFAULT)
 
         Log.d(LOG_TAG, "keyHandleBase64: $keyHandleBase64")
@@ -268,50 +251,48 @@ class ResistActivity : AppCompatActivity() {
     }
 
     private fun storeKeyHandle(keyHandle: ByteArray) {
-        PreferenceManager.getDefaultSharedPreferences(this).edit {
-            putString(KEY_HANDLE_PREF, Base64.encodeToString(keyHandle, Base64.DEFAULT))
+        editor.putString(KEY_HANDLE_PREF, Base64.encodeToString(keyHandle, Base64.DEFAULT))
+    }
+}
+
+private fun loadKeyHandle(): ByteArray? {
+    val keyHandleBase64 = DataManage.key_handle
+        ?: return null
+    return Base64.decode(keyHandleBase64, Base64.DEFAULT)
+}
+
+fun connect() {
+    //userId":null,"deviceId":null,"transactionId":null,"username":"12480","displayName":"12480","authenticatorSelection":null,"attestation":null,"extension":null
+
+    val ConnectJsonData = JSONObject()
+    ConnectJsonData.put("userId", null)
+    ConnectJsonData.put("deviceId", null)
+    ConnectJsonData.put("transactionId", null)
+    ConnectJsonData.put("username", "jihyeon111")
+    ConnectJsonData.put("displayName", "ffff")
+    ConnectJsonData.put("authenticatorSelection", null)
+    ConnectJsonData.put("attestation", null)
+    ConnectJsonData.put("extension", null)
+//        ConnectJsonData.put("userId", "BEEE")
+//        ConnectJsonData.put("password", "beee")
+//        ConnectJsonData.put("loginCounter", 0)
+//
+    val body = JsonParser.parseString(ConnectJsonData.toString()) as JsonObject
+//
+//        Log.e("보내는 Body", body.toString())
+
+    ConnectServiceImpl.service.getSignIn(body).enqueue(object : Callback<DefaultData> {
+        override fun onFailure(call: Call<DefaultData>, t: Throwable) {
+            //통신 실패
+            Log.e("통신 실패", "통신 실패닷 이눔아")
+            Log.e("실패 이유가 뭐냐", t.toString())
         }
-    }
 
-    private fun loadKeyHandle(): ByteArray? {
-        val keyHandleBase64 = PreferenceManager.getDefaultSharedPreferences(this).getString(
-            KEY_HANDLE_PREF, null)
-            ?: return null
-        return Base64.decode(keyHandleBase64, Base64.DEFAULT)
-    }
+        override fun onResponse(call: Call<DefaultData>, response: Response<DefaultData>) {
+            //통신은 어쩌고 성공
+            Log.e("통신 성공", "통신은 어쩌고 성공 ${response.body().toString()}")
+        }
 
-    fun connect(){
-        //userId":null,"deviceId":null,"transactionId":null,"username":"12480","displayName":"12480","authenticatorSelection":null,"attestation":null,"extension":null
+    })
 
-        val ConnectJsonData = JSONObject()
-//        ConnectJsonData.put("userId", "null")
-//        ConnectJsonData.put("deviceId", "null")
-//        ConnectJsonData.put("transactionId", "null")
-//        ConnectJsonData.put("username", "test")
-//        ConnectJsonData.put("displayName", "test")
-//        ConnectJsonData.put("authenticatorSelection", "null")
-//        ConnectJsonData.put("attestation", "null")
-//        ConnectJsonData.put("extension", "null")
-        ConnectJsonData.put("userId", "123")
-        ConnectJsonData.put("password", "1234567890")
-        ConnectJsonData.put("loginCounter", 0)
-
-        val body = JsonParser.parseString(ConnectJsonData.toString()) as JsonObject
-
-        Log.e("보내는 Body", body.toString())
-
-        ConnectServiceImpl.service.getSignIn(body).enqueue(object : Callback<DefaultData>{
-            override fun onFailure(call: Call<DefaultData>, t: Throwable) {
-                //통신 실패
-                Log.e("통신 실패", "통신 실패닷 이눔아")
-            }
-
-            override fun onResponse(call: Call<DefaultData>, response: Response<DefaultData>) {
-                //통신은 어쩌고 성공
-                Log.e("통신 성공", "통신은 어쩌고 성공 ${response.body().toString()}")
-            }
-
-        })
-
-    }
 }
