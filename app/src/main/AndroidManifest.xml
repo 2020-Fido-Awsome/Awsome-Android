@@ -34,29 +34,14 @@
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"/>
         <activity android:name=".ui.AuthnActivity">
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="aws.eazysecure-auth.com" />
-                <data android:scheme="https" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".ui.SignupActivity" />
         <activity android:name=".ui.ResistActivity" >
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="aws.eazysecure-auth.com" />
-                <data android:scheme="https" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".activity_admin.AdminActivity" />
         <activity android:name=".ui.SecurityActivity" />
         <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.QrActivity"/>
     </application>
-
-
 </manifest>

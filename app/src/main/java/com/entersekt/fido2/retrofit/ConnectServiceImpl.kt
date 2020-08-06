@@ -2,6 +2,7 @@ package com.entersekt.fido2.retrofit
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.net.ssl.SSLContext
@@ -13,10 +14,6 @@ object ConnectServiceImpl {
 
     //    private var okHttpClient : OkHttpClient
     private var gson: Gson = GsonBuilder().setLenient().create()
-//
-//    val urlConnection: URLConnection = url.openConnection()
-//    val inputStream: InputStream = urlConnection.getInputStream()
-//    copyInputStreamToOutputStream(inputStream, System.out)
 
     init {
         val sslContext: SSLContext? =
@@ -25,14 +22,6 @@ object ConnectServiceImpl {
         retrofit = Retrofit.Builder().apply {
             baseUrl(BASE_URL)
             client(getUnsafeOkHttpClient())
-
-//            if (sslContext != null) {
-//                client(
-//                    OkHttpClient.Builder()
-//                        .sslSocketFactory(sslContext.socketFactory)   //ssl
-//                        .build()
-//                )
-//            }
             addConverterFactory(GsonConverterFactory.create(gson))
         }.build()
     }
@@ -42,3 +31,15 @@ object ConnectServiceImpl {
 }
 
 
+
+
+
+
+
+//            if (sslContext != null) {
+//                client(
+//                    OkHttpClient.Builder()
+//                        .sslSocketFactory(sslContext.socketFactory)   //ssl
+//                        .build()
+//                )
+//            }

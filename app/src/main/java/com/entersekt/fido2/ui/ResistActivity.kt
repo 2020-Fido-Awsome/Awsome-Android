@@ -9,7 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.entersekt.fido2.R
 import com.entersekt.fido2.appdata.DataManage
-import com.entersekt.fido2.data.DefaultData
+import com.entersekt.fido2.data.ResponseData
+import com.entersekt.fido2.data.SignUpData
 import com.entersekt.fido2.retrofit.ConnectServiceImpl
 import com.google.android.gms.fido.Fido
 import com.google.android.gms.fido.fido2.api.common.*
@@ -24,6 +25,9 @@ import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
 import java.security.SecureRandom
+
+
+
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -41,7 +45,12 @@ class ResistActivity : AppCompatActivity() {
         var port = 9999
         var msg = "0"
         var nick = "defaultNickName"
+        lateinit var responseData: ResponseData
+
+
     }
+
+    lateinit var challenge:ByteArray
 
 
     var editor = DataManage.pref.edit()
@@ -50,7 +59,7 @@ class ResistActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resist)
-        registerFido2()
+        connect()
         //signFido2Button.setOnClickListener { signFido2() }
         //signFido2Button.isEnabled = loadKeyHandle() != null
 
@@ -90,23 +99,60 @@ class ResistActivity : AppCompatActivity() {
         }
     }
 
-    private fun registerFido2() {
-        // All the option parameters should come from the Relying Party / server
-        Log.e("Retrofit 통신 시작", "시작하라고")
-        connect()
+    //Retrofit 통신 시작
+    fun connect() {
+        Log.e("Retrofit 통신 시작", "")
 
+        val ConnectJsonData = JSONObject()
+
+        ConnectJsonData.put("userId", "")
+        ConnectJsonData.put("deviceId", null)
+        ConnectJsonData.put("transactionId", null)
+        ConnectJsonData.put("username", "jihyeontest3")
+        ConnectJsonData.put("displayName", "1111")
+        ConnectJsonData.put("authenticatorSelection", null)
+        ConnectJsonData.put("attestation", null)
+        ConnectJsonData.put("userIcon", null)
+        ConnectJsonData.put("extension", null)
+        ConnectJsonData.put("secondFactor", false)
+
+        val body = JsonParser.parseString(ConnectJsonData.toString()) as JsonObject
+
+        ConnectServiceImpl.service.postSignUp(body).enqueue(object : Callback<ResponseData> {
+            override fun onFailure(call: Call<ResponseData>, t: Throwable) {
+                //통신 실패
+                Log.e("통신 실패", "통신 실패닷 이눔아")
+                Log.e("실패 이유가 뭐냐", t.toString())
+            }
+
+            override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
+                //통신은 어쩌고 성공
+                Log.e("통신 성공", "통신은 어쩌고 성공 ${response.body()}")
+                responseData = response.body()!!
+
+                registerFido2()
+            }
+        })
+    }
+
+
+    fun registerFido2() {
+        // All the option parameters should come from the Relying Party / server
         Log.e("registerFido2 실행실행", "실행 시작")
+
+        challenge = challenge()
+        println("challenge함수 값 $challenge")
         val options = PublicKeyCredentialCreationOptions.Builder()
-            .setRp(PublicKeyCredentialRpEntity("aws.eazysecure-auth.com", "Fido2Demo", null))
+            .setRp(PublicKeyCredentialRpEntity("aws.eazysecure-auth.com", "awsome2020", null))
             .setUser(
                 PublicKeyCredentialUserEntity(
-                    "jihyeon111".toByteArray(), //name
-                    "nothing", //icon
-                    "12341234", //id
-                    "ffff" //displayName
+                    responseData.publicKeyCredentialCreationOptions.user.id.toByteArray(),//"jihyeon111".toByteArray(), //name
+                    "null", //icon
+                    responseData.publicKeyCredentialCreationOptions.user.name, //id
+                    responseData.publicKeyCredentialCreationOptions.user.displayName //displayName
                 )
             )
-            .setChallenge(challenge())
+            .setChallenge(challenge)
             .setParameters(
                 listOf(
                     PublicKeyCredentialParameters(
@@ -124,7 +170,7 @@ class ResistActivity : AppCompatActivity() {
         fido2PendingIntentTask.addOnSuccessListener { fido2PendingIntent ->
             if (fido2PendingIntent.hasPendingIntent()) {
                 try {
-                    Log.e("실행되라멍청아", "launching Fido2 Pending Intent")
+                    Log.e("실행돼라", "launching Fido2 Pending Intent")
                     fido2PendingIntent.launchPendingIntent(
                         this@ResistActivity,
                         REQUEST_CODE_REGISTER
@@ -190,10 +236,16 @@ class ResistActivity : AppCompatActivity() {
     private fun handleRegisterResponse(fido2Response: ByteArray) {
         val response = AuthenticatorAttestationResponse.deserializeFromBytes(fido2Response)
         Log.e(LOG_TAG, "응답바디: $response")
-        val keyHandleBase64 = Base64.encodeToString(response.keyHandle, Base64.DEFAULT)
+        val keyHandleBase64 = Base64.encodeToString(response.keyHandle, Base64.URL_SAFE)
+
         val clientDataJson = String(response.clientDataJSON, Charsets.UTF_8)
+        val clientDataJsonBase64 = Base64.encodeToString(response.clientDataJSON, Base64.URL_SAFE)
+        clientDataJsonBase64.replace("\n", "")
+        clientDataJsonBase64.replace("\\", "")
         val attestationObjectBase64 =
-            Base64.encodeToString(response.attestationObject, Base64.DEFAULT)
+            Base64.encodeToString(response.attestationObject, Base64.URL_SAFE)
+        attestationObjectBase64.replace("\n", "")
+//        attestationObjectBase64.replace("\","")
 
         storeKeyHandle(response.keyHandle)
         //signFido2Button.isEnabled = true
@@ -209,6 +261,40 @@ class ResistActivity : AppCompatActivity() {
                 "$clientDataJson\n\n" +
                 "attestationObjectBase64:\n" +
                 "$attestationObjectBase64\n"
+
+        val SecondJsonData = JSONObject()
+
+        SecondJsonData.put("userId", responseData.publicKeyCredentialCreationOptions.user.name)
+        SecondJsonData.put("deviceId", "defaultDevice")
+        SecondJsonData.put("transactionId", "null")
+
+        val pubKeyCre = JSONObject()
+        pubKeyCre.put("id", keyHandleBase64)
+        pubKeyCre.put("type", "public-key")
+        pubKeyCre.put("rawId", keyHandleBase64)
+        SecondJsonData.put("publicKeyCredential", pubKeyCre)
+
+        val respon = JSONObject()
+        respon.put("clientDataJSON", clientDataJsonBase64)
+        respon.put("attestationObject", attestationObjectBase64)
+        SecondJsonData.put("response", respon)
+
+        println(SecondJsonData)
+
+        val body = JsonParser.parseString(SecondJsonData.toString()) as JsonObject
+
+        ConnectServiceImpl.service.postResult(body).enqueue(object : Callback<SignUpData> {
+            override fun onFailure(call: Call<SignUpData>, t: Throwable) {
+                //통신 실패
+                Log.e("result 실패", "실패실패실패")
+            }
+
+            override fun onResponse(call: Call<SignUpData>, response: Response<SignUpData>) {
+                //통신 성공
+                Log.e("result 성공", response.body().toString())
+            }
+
+        })
 
         //회원가입 성공-소켓 통신 호출
         SigninConnect(nick).start()
@@ -227,7 +313,7 @@ class ResistActivity : AppCompatActivity() {
     /**
      * The response should be sent to the Relying Party / server to validate
      */
-    private fun handleSignResponse(fido2Response: ByteArray) {
+    fun handleSignResponse(fido2Response: ByteArray) {
         val response = AuthenticatorAssertionResponse.deserializeFromBytes(fido2Response)
         val keyHandleBase64 = Base64.encodeToString(response.keyHandle, Base64.DEFAULT)
         val clientDataJson = String(response.clientDataJSON, Charsets.UTF_8)
@@ -251,7 +337,6 @@ class ResistActivity : AppCompatActivity() {
                 "$signatureBase64\n"
 
         resultText.text = signFido2Result
-
     }
 
     /**
@@ -285,48 +370,11 @@ class ResistActivity : AppCompatActivity() {
 
         }
     }
-
 }
 
 private fun loadKeyHandle(): ByteArray? {
     val keyHandleBase64 = DataManage.key_handle
         ?: return null
     return Base64.decode(keyHandleBase64, Base64.DEFAULT)
-}
-
-fun connect() {
-    //userId":null,"deviceId":null,"transactionId":null,"username":"12480","displayName":"12480","authenticatorSelection":null,"attestation":null,"extension":null
-
-    val ConnectJsonData = JSONObject()
-    ConnectJsonData.put("userId", null)
-    ConnectJsonData.put("deviceId", null)
-    ConnectJsonData.put("transactionId", null)
-    ConnectJsonData.put("username", "jihyeon111")
-    ConnectJsonData.put("displayName", "ffff")
-    ConnectJsonData.put("authenticatorSelection", null)
-    ConnectJsonData.put("attestation", null)
-    ConnectJsonData.put("extension", null)
-//        ConnectJsonData.put("userId", "BEEE")
-//        ConnectJsonData.put("password", "beee")
-//        ConnectJsonData.put("loginCounter", 0)
-//
-    val body = JsonParser.parseString(ConnectJsonData.toString()) as JsonObject
-//
-//        Log.e("보내는 Body", body.toString())
-
-    ConnectServiceImpl.service.getSignIn(body).enqueue(object : Callback<DefaultData> {
-        override fun onFailure(call: Call<DefaultData>, t: Throwable) {
-            //통신 실패
-            Log.e("통신 실패", "통신 실패닷 이눔아")
-            Log.e("실패 이유가 뭐냐", t.toString())
-        }
-
-        override fun onResponse(call: Call<DefaultData>, response: Response<DefaultData>) {
-            //통신은 어쩌고 성공
-            Log.e("통신 성공", "통신은 어쩌고 성공 ${response.body().toString()}")
-        }
-
-    })
-
 }
 
