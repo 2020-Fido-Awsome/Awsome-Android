@@ -24,7 +24,8 @@ class StartActivity : AppCompatActivity() {
        }
 
         btn_SignIn.setOnClickListener { //로그인
-            val intent = Intent(this, AuthnActivity::class.java)
+            //val intent = Intent(this, AuthnActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

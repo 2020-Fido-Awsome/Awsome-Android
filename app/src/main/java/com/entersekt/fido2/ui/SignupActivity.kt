@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_store.*
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
+import java.net.URLEncoder
 import java.security.MessageDigest
 
 class SignupActivity : AppCompatActivity() {
@@ -36,9 +37,10 @@ class SignupActivity : AppCompatActivity() {
                     } else {
                         usernick = editTextTextPersonName.text.toString()
                         editor.putString("nick", usernick)
-
-                        tempSha = DataManage.mac.plus(usernick)
+                        //tempSha = URLEncoder.encode(usernick.plus(DataManage.mac), "UTF-8")
+                        tempSha = usernick.plus(DataManage.mac)
                         editor.putString("shaInfo", shaEncrypt(tempSha))
+                        editor.commit()
 
                         val intent = Intent(this, ResistActivity::class.java)
                         intent.putExtra("nick", usernick)

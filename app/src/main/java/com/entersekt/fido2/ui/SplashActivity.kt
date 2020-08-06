@@ -13,16 +13,13 @@ class SplashActivity : AppCompatActivity() {
 
     val SPLASH_VIEW_TIME: Long = 2000 //2초간 스플래시 화면을 보여줌 (ms)
 
-    var editor = DataManage.pref.edit()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_splash)
 
         val macAddress = getMACAddress("wlan0")
-        //DataManage.macAddress = macAddress
-        editor.putString("mac", macAddress)
+        DataManage.mac = macAddress
 
         Handler().postDelayed({ //delay를 위한 handler
             startActivity(Intent(this, StartActivity::class.java))
@@ -41,7 +38,7 @@ private fun getMACAddress(interfaceName: String?): String {
             }
             val mac: ByteArray = intf.hardwareAddress ?: return ""
             val buf = StringBuilder()
-            for (idx in mac.indices) buf.append(String.format("%02X:", mac[idx]))
+            for (idx in mac.indices) buf.append(String.format("%02X:", mac[idx]).toLowerCase())
             if (buf.length > 0) buf.deleteCharAt(buf.length - 1)
             return buf.toString()
         }

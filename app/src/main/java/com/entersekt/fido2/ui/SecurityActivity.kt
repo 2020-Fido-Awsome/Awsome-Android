@@ -259,6 +259,7 @@ class SecurityActivity : AppCompatActivity() {
         var temPw = AwsomeApp.encryptData(str)
         editor.putString("wp1" , Base64.getEncoder().encodeToString(temPw.first))
         editor.putString("wp2", Base64.getEncoder().encodeToString(temPw.second))
+        editor.commit()
 
         return str
     }

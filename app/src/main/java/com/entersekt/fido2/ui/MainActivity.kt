@@ -20,8 +20,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    var editor = DataManage.pref.edit()
-
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,9 +53,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val macAddress = getMACAddress("wlan0")
-        //DataManage.macAddress = macAddress
-        editor.putString("mac", macAddress)
-
+        DataManage.mac = macAddress
     }
 
     var lastTimeBackPressed:Long = 0
