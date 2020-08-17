@@ -17,7 +17,7 @@ import java.security.SecureRandom
 
 class AuthnActivity : AppCompatActivity() {
     companion object {
-        private const val LOG_TAG = "Fido2Demo"
+        private const val LOG_TAG = "awsome2020"
         private const val REQUEST_CODE_REGISTER = 1
         private const val REQUEST_CODE_SIGN = 2
         private const val KEY_HANDLE_PREF = "key_handle"
@@ -66,7 +66,7 @@ class AuthnActivity : AppCompatActivity() {
     private fun registerFido2() {
         // All the option parameters should come from the Relying Party / server
         val options = PublicKeyCredentialCreationOptions.Builder()
-            .setRp(PublicKeyCredentialRpEntity("aws.eazysecure-auth.com", "Fido2Demo", null))
+            .setRp(PublicKeyCredentialRpEntity("aws.eazysecure-auth.com", "awsome2020", null))
             .setUser(
                 PublicKeyCredentialUserEntity(
                     "demo@example.com".toByteArray(),

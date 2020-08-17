@@ -33,7 +33,7 @@ import java.security.SecureRandom
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class ResistActivity : AppCompatActivity() {
     companion object {
-        private const val LOG_TAG = "Fido2Demo"
+        private const val LOG_TAG = "awsome2020"
         private const val REQUEST_CODE_REGISTER = 1
         private const val REQUEST_CODE_SIGN = 2
         private const val KEY_HANDLE_PREF = "key_handle"
