@@ -1,6 +1,7 @@
 package com.entersekt.fido2.ui
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -14,6 +15,13 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign)
 
+        jihyeon.setOnClickListener {
+            val url = "https://aws.eazysecure-auth.com"
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
+        }
+
         btn_SignUp.setOnClickListener { //회원가입
             val intent = Intent(this, CreateActivity::class.java)
 
@@ -25,7 +33,7 @@ class StartActivity : AppCompatActivity() {
 
         btn_SignIn.setOnClickListener { //로그인
             //val intent = Intent(this, AuthnActivity::class.java)
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, AuthnActivity::class.java)
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

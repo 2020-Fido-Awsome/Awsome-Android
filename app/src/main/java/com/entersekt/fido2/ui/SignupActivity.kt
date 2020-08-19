@@ -65,14 +65,4 @@ class SignupActivity : AppCompatActivity() {
         return strHash
     }
 
-//    class StoreDisconnect:Thread(){
-//        override fun run() {
-//            try{
-//                socket.close()
-//                ThreadDeath()
-//            }catch(e:Exception){
-//
-//            }
-//        }
-//    }
 }

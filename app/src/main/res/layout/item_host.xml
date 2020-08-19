@@ -6,13 +6,16 @@
     android:layout_height="80dp">
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
+        android:scrollIndicators="none"
+        android:id="@+id/host_scrollview"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:foregroundGravity="left"
+        >
 
         <LinearLayout
             android:id="@+id/background"
@@ -26,6 +29,7 @@
                 android:textColor="@color/greyblack"
                 android:fontFamily="@font/roboto_regular"
                 android:id="@+id/txt_HostName"
+                android:textSize="12sp"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -37,6 +41,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textSize="12sp"
                 android:textColor="@color/greyblack"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
@@ -48,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textSize="12sp"
                 android:textColor="@color/greyblack"
                 android:fontFamily="@font/roboto_regular"
                 android:text="192.168.0.1" />

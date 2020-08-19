@@ -3,6 +3,7 @@ package com.entersekt.fido2.ui
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -10,21 +11,34 @@ import com.entersekt.fido2.R
 import com.entersekt.fido2.activity_admin.AdminActivity
 import com.entersekt.fido2.activity_host.HostActivity
 import com.entersekt.fido2.appdata.DataManage
-import com.entersekt.fido2.ui.LogActivity
-import com.entersekt.fido2.ui.ResetActivity
-import com.entersekt.fido2.ui.SecurityActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.DataInputStream
+import java.io.DataOutputStream
 import java.net.NetworkInterface
-import java.security.MessageDigest
+import java.net.Socket
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+
+    companion object{
+        var socket = Socket()
+        lateinit var writeSocket: DataOutputStream
+        lateinit var readSocket: DataInputStream
+        var ip = "192.168.0.254"  //서버 ip
+        var port = 9999
+        var msg = "0"
+        var ssid = ""
+    }
+
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
+
+        Connect().start()
+
 
         btn_Host.setOnClickListener {
             val intent = Intent(this, HostActivity::class.java)
@@ -51,6 +65,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        if(ssid!=""){
+            txt_ssid.text = ssid
+        }
 
         val macAddress = getMACAddress("wlan0")
         DataManage.mac = macAddress
@@ -83,6 +100,31 @@ class MainActivity : AppCompatActivity() {
         } catch (ex: Exception) {
         } // for now eat exceptions
         return ""
+    }
+
+    class Connect() :Thread(){
+        override fun run(){
+            try{
+                Log.e("socket", "홈 소켓 통신 시작")
+                socket = Socket(ip, port)
+                writeSocket = DataOutputStream(socket.getOutputStream())
+                readSocket = DataInputStream(socket.getInputStream())
+
+                msg = "ssid"
+
+                writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
+
+                var dataArr = ByteArray(1024) // 1024만큼 데이터 받기
+                readSocket.read(dataArr) // byte array에 데이터를 씁니다.
+                ssid = String(dataArr).split('/')[0]// 서버에서 보내준 한 줄 전체 - 쓰레기값 지움
+                println("name : ${ssid}")
+
+
+            }catch(e:Exception){    //연결 실패
+                socket.close()
+            }
+
+        }
     }
 
 }

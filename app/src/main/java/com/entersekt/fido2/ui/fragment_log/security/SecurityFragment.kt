@@ -47,9 +47,6 @@ class SecurityFragment : Fragment() {
         securityAdapter = SecurityAdapter(view.context)
         rv_security.adapter = securityAdapter
         rv_security.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-//        Connect().start()
-//        loadDatas()
-//        onStart()
 
         viewLifecycleOwner.lifecycleScope.launch {
             val connect = withContext(Dispatchers.IO) {
@@ -63,7 +60,7 @@ class SecurityFragment : Fragment() {
         }
     }
 
-    suspend fun connect(){
+    private suspend fun connect(){
         socket = Socket(ip, port)
         writeSocket = DataOutputStream(socket.getOutputStream())
         readSocket = DataInputStream(socket.getInputStream())
@@ -86,24 +83,16 @@ class SecurityFragment : Fragment() {
 //        loadDatas()
     }
 
-
-    class Disconnect:Thread(){
-        override fun run() {
-            try{
-                socket.close()
-//                ThreadDeath()
-            }catch(e:Exception){
-
-            }
-        }
-    }
-
-    suspend fun loadDatas(){
+    private suspend fun loadDatas(){
 
         var dataArr = arrayOfNulls<String>(cnt)
 
         println("count : $cnt")
         println("loadData : $data")
+
+        if(data.split("//")[1]=="Safe"){
+            img_safe.setImageResource(R.drawable.safe)
+        }else img_safe.setImageResource(R.drawable.warning)
 
         for(i in 1..cnt){
             dataArr[i-1] = data.split("//")[i+2]
@@ -128,12 +117,4 @@ class SecurityFragment : Fragment() {
         }
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        datas.clear()
-//
-//        println("securityFragmentOnStart")
-////        Connect().start()
-////        loadDatas()
-//    }
 }

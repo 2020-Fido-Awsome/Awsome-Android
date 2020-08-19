@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.entersekt.fido2.R
 import com.entersekt.fido2.appdata.DataManage
 import kotlinx.android.synthetic.main.activity_host.*
+import kotlinx.android.synthetic.main.item_host.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -51,10 +52,8 @@ class HostActivity : AppCompatActivity() {
                         datas[position].txt_IP,
                         datas[position].status
                     )
-
                     println("다시 재정비")
                     hostAdpater.notifyDataSetChanged()
-
                 }
             }
         )
@@ -74,13 +73,6 @@ class HostActivity : AppCompatActivity() {
 
             hostAdpater.notifyDataSetChanged()
         }
-
-//        Connect().start()
-//        ObserveChange().start()
-//        if (!data.isNullOrEmpty() && cnt != 0) {
-//            loadDatas()
-//        }
-
     }
 
 
@@ -101,10 +93,10 @@ class HostActivity : AppCompatActivity() {
             println("datasize : ${datas.size}")
 
             if(!status){
-                msg = "${DataManage.macAddress}/blockperson/${host}/${Companion.ip}/${mac}"
+                msg = "${DataManage.macAddress}/blockperson/${host}/${mac}/${Companion.ip}"
                 datas[position].status = !datas[position].status
             }else {
-                msg = "${DataManage.macAddress}/allowperson/${host}/${Companion.ip}/${mac}"
+                msg = "${DataManage.macAddress}/allowperson/${host}/${mac}/${Companion.ip}"
                 datas[position].status = !datas[position].status
             }
 
@@ -127,7 +119,7 @@ class HostActivity : AppCompatActivity() {
         readSocket.read(dataArr) // byte array에 데이터를 씁니다.
         data = String(dataArr)
 //        cnt = data.split('/')[0].toInt()
-        cnt = 3
+        cnt = data.split('/')[0].toInt()
         println("loadData : $data $cnt")
         println("첫번째 함수 끝")
 

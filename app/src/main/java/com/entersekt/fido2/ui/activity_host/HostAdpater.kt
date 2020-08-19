@@ -57,6 +57,9 @@ class HostViewHolder(
         } else {
             background.setBackgroundResource(R.color.white)
             itemView.btn_host_item.setBackgroundResource(R.drawable.delete_cut)
+            txt_HostName.paintFlags = 0
+            txt_MAC.paintFlags = 0
+            txt_IP.paintFlags = 0
         }
 
     }

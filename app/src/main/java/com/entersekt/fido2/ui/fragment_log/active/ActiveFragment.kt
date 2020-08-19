@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.entersekt.fido2.R
 import com.entersekt.fido2.appdata.DataManage
-import com.entersekt.fido2.fragment_log.security.SecurityFragment
 import kotlinx.android.synthetic.main.fragment_active.*
 import kotlinx.coroutines.*
 import java.io.DataInputStream
@@ -80,18 +79,6 @@ class ActiveFragment : Fragment() {
 
     }
 
-
-    class Disconnect:Thread(){
-        override fun run() {
-            try{
-                socket.close()
-//                ThreadDeath()
-            }catch(e:Exception){
-
-            }
-        }
-    }
-
     private suspend fun loadDatas(){
 
         var dataArr = arrayOfNulls<String>(cnt)
@@ -123,14 +110,4 @@ class ActiveFragment : Fragment() {
         }
 
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//        datas.clear()
-//
-//        println("activefragmentOnStart")
-//        Connect().start()
-//        loadDatas()
-//    }
-
 }
