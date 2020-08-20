@@ -28,8 +28,6 @@ import java.security.SecureRandom
 
 
 
-
-
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class ResistActivity : AppCompatActivity() {
     companion object {
@@ -351,6 +349,7 @@ class ResistActivity : AppCompatActivity() {
 
     private fun storeKeyHandle(keyHandle: ByteArray) {
         editor.putString(KEY_HANDLE_PREF, Base64.encodeToString(keyHandle, Base64.DEFAULT))
+        editor.commit()
     }
 
     class SigninConnect(nick: String) : Thread() {

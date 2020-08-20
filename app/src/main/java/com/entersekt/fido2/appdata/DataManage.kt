@@ -34,7 +34,7 @@ object DataManage{
         }!!
 
     var key_handle: String?
-        get() = pref.getString("key_handle", "---")
+        get() = pref.getString("key_handle", null)
         set(value) = pref.edit{
             it.putString("key_handle", value)?.apply()
         }

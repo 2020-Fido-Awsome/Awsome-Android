@@ -185,7 +185,7 @@ class AuthnActivity : AppCompatActivity() {
     private fun signFido2() {
         // All the option parameters should come from the Relying Party / server
         val options = PublicKeyCredentialRequestOptions.Builder()
-            .setRpId("awsomewifi.firebaseapp.com")
+            .setRpId("aws.eazysecure-auth.com")
             .setAllowList(
                 listOf(
                     PublicKeyCredentialDescriptor(
@@ -336,6 +336,9 @@ class AuthnActivity : AppCompatActivity() {
                 "$signatureBase64\n"
 
         resultText.text = signFido2Result
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     /**
