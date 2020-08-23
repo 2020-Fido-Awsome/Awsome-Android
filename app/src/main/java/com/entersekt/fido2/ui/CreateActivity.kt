@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.entersekt.fido2.R
+import com.entersekt.fido2.appdata.DataManage
 import com.google.zxing.integration.android.IntentIntegrator
+import java.security.MessageDigest
 
 
 class CreateActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create)
@@ -33,7 +36,7 @@ class CreateActivity : AppCompatActivity() {
                 "Please give first place to AWS team." ) {
                 //Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
                 Toast.makeText(this, "인증성공", Toast.LENGTH_LONG).show()
-                val intent = Intent(this, SignupActivity::class.java)
+                val intent = Intent(this, ResistActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent)

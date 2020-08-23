@@ -56,19 +56,20 @@ class ResistActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.e("fiod시시시시시작", "이거되면  액티비티 열리는거" )
         setContentView(R.layout.activity_resist)
         connect()
         //signFido2Button.setOnClickListener { signFido2() }
         //signFido2Button.isEnabled = loadKeyHandle() != null
 
-        nick = intent.getStringExtra("nick")!!
-        println("등록 실행시 : $nick")
+//        nick = intent.getStringExtra("nick")!!
+//        println("등록 실행시 : $nick")
 
-        SigninConnect(nick).start() // 0823 추가
+//        SigninConnect(nick).start() // 0823 추가
 
-        val intent = Intent(this, MainActivity::class.java) //0823추가
-        startActivity(intent)
-        finish()
+//        val intent = Intent(this, MainActivity::class.java) //0823추가
+//        startActivity(intent)
+//        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -134,7 +135,7 @@ class ResistActivity : AppCompatActivity() {
                 Log.e("통신 성공", "통신은 어쩌고 성공 ${response.body()}")
                 responseData = response.body()!!
 
-                //registerFido2() // 0823삭제
+                registerFido2() // 0823삭제
             }
         })
     }
@@ -301,11 +302,11 @@ class ResistActivity : AppCompatActivity() {
         })
 
         //회원가입 성공-소켓 통신 호출
-        SigninConnect(nick).start()
+        //SigninConnect(nick).start()
 
         resultText.text = registerFido2Result
         Toast.makeText(this, "회원가입 성공했습니다", Toast.LENGTH_LONG).show()
-        val intent = Intent(this, StartActivity::class.java);
+        val intent = Intent(this, TutorialActivity::class.java);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -358,23 +359,23 @@ class ResistActivity : AppCompatActivity() {
         editor.commit()
     }
 
-    class SigninConnect(nick: String) : Thread() {
-        private val usernick = nick
-        override fun run() {
-            try {
-                socket = Socket(ip, port)
-                writeSocket = DataOutputStream(socket.getOutputStream())
-                readSocket = DataInputStream(socket.getInputStream())
-
-                msg = "${DataManage.macAddress}/setinfo/${usernick}"
-                writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
-                socket.close()
-            } catch (e: Exception) {    //연결 실패
-                socket.close()
-            }
-
-        }
-    }
+//    class SigninConnect(nick: String) : Thread() {
+//        private val usernick = nick
+//        override fun run() {
+//            try {
+//                socket = Socket(ip, port)
+//                writeSocket = DataOutputStream(socket.getOutputStream())
+//                readSocket = DataInputStream(socket.getInputStream())
+//
+//                msg = "${DataManage.macAddress}/setinfo/${usernick}"
+//                writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
+//                socket.close()
+//            } catch (e: Exception) {    //연결 실패
+//                socket.close()
+//            }
+//
+//        }
+//    }
 }
 
 private fun loadKeyHandle(): ByteArray? {
