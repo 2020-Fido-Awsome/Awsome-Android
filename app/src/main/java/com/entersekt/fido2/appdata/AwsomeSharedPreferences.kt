@@ -10,7 +10,7 @@ class AwsomeSharedPreferences (context: Context){
 
     val prefs: SharedPreferences? = context.getSharedPreferences("prefs", 0)
     /* 파일 이름과 EditText를 저장할 Key 값을 만들고 prefs 인스턴스 초기화 */
-
+/*
     @RequiresApi(Build.VERSION_CODES.M)
     public fun checkFirstRun() { // 첫 실행시 키 생성
         var isFirstRun: Boolean = prefs!!.getBoolean("isFirstRun", true)
@@ -21,5 +21,6 @@ class AwsomeSharedPreferences (context: Context){
             this.prefs.edit().putBoolean("isFirstRun", false).apply()
         }
     }
+ */
 
 }

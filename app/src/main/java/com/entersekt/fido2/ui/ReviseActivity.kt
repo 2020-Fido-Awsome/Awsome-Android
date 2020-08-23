@@ -52,13 +52,18 @@ class ReviseActivity : AppCompatActivity() {
                     ssid = txt_newSsid.text.toString()
                     pwd = txt_pwd.text.toString()
 
-
+/*
                     var temPw = AwsomeApp.encryptData(pwd)
 
                     editor.putString("ws", ssid)
                     editor.putString("wp1" , Base64.getEncoder().encodeToString(temPw.first))
                     editor.putString("wp2", Base64.getEncoder().encodeToString(temPw.second))
                     editor.commit()
+                    */
+                    DataManage.ws = ssid
+                    DataManage.wp = pwd
+                    // 2줄 추가
+
 
 
                     Connect(ssid, pwd).start()

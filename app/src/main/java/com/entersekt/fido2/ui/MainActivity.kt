@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = "ssid"
+                msg = "${DataManage.macAddress}/ssid"
 
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 

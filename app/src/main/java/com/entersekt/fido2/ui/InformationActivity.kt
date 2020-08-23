@@ -71,11 +71,13 @@ class InformationActivity : AppCompatActivity() {
         // Base64.getDecoder().decode(encodedString)
         //var wp1 = sharedPreferences.getString("wp1", DataManage.iniPw1).toByteArray(Charsets.UTF_8)
         //var wp2 = sharedPreferences.getString("wp2", DataManage.iniPw1).toByteArray(Charsets.UTF_8)
+       /*
         var wp1 = Base64.getDecoder().decode(sharedPreferences.getString("wp1", DataManage.iniPw1))
         var wp2 = Base64.getDecoder().decode(sharedPreferences.getString("wp2", DataManage.iniPw2))
 
         var wifiPw = AwsomeApp.decryptData(wp1, wp2)
-
+*/
+        var wifiPw = sharedPreferences.getString("wp","awsfido2020!") // 추가
 
         //var wifiPw = "awsome2020!"
         //println("ssid: $ssid, pw: $wifiPw")

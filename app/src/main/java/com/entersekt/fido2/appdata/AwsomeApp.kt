@@ -22,7 +22,7 @@ class AwsomeApp :Application(){
 
         lateinit var prefs : AwsomeSharedPreferences
 
-
+/*
         @RequiresApi(Build.VERSION_CODES.M)
         fun genKey() {
 
@@ -69,6 +69,7 @@ class AwsomeApp :Application(){
             cipher.init(Cipher.DECRYPT_MODE, getKey(), spec)
             return cipher.doFinal(data).toString(Charsets.UTF_8).trim()
         }
+ */
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -78,7 +79,7 @@ class AwsomeApp :Application(){
         )
         super.onCreate()
 
-        prefs.checkFirstRun()
+        //prefs.checkFirstRun()
         DataManage.init(this)
     }
 }

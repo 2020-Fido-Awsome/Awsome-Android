@@ -63,6 +63,12 @@ class ResistActivity : AppCompatActivity() {
 
         nick = intent.getStringExtra("nick")!!
         println("등록 실행시 : $nick")
+
+        SigninConnect(nick).start() // 0823 추가
+
+        val intent = Intent(this, MainActivity::class.java) //0823추가
+        startActivity(intent)
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -128,7 +134,7 @@ class ResistActivity : AppCompatActivity() {
                 Log.e("통신 성공", "통신은 어쩌고 성공 ${response.body()}")
                 responseData = response.body()!!
 
-                registerFido2()
+                //registerFido2() // 0823삭제
             }
         })
     }

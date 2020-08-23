@@ -61,6 +61,12 @@ object DataManage{
             it.putString("ws", value)?.apply()
         }
 
+    var wp: String?
+        get() = pref.getString("wp", "awsfido2020!")
+        set(value) = pref.edit{
+            it.putString("wp", value)?.apply()
+        }
+/*
     var iniPw = AwsomeApp.encryptData("awsfido2020!")
     @RequiresApi(Build.VERSION_CODES.O)
     var iniPw1 = Base64.getEncoder().encodeToString(iniPw.first)
@@ -78,4 +84,5 @@ object DataManage{
         set(value) = pref.edit {
             it.putString("wp2", value)?.apply()
         }
+ */
 }

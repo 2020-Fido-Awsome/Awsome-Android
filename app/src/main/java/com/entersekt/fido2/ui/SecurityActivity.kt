@@ -230,11 +230,12 @@ class SecurityActivity : AppCompatActivity() {
 //            str = str.plus((random.nextInt()+random.nextFloat()).toString())
 //        }
 
-        var editor = DataManage.pref.edit()
-        var temPw = AwsomeApp.encryptData(str)
-        editor.putString("wp1", Base64.getEncoder().encodeToString(temPw.first))
-        editor.putString("wp2", Base64.getEncoder().encodeToString(temPw.second))
-        editor.commit()
+//        var editor = DataManage.pref.edit()
+//        var temPw = AwsomeApp.encryptData(str)
+//        editor.putString("wp1", Base64.getEncoder().encodeToString(temPw.first))
+//        editor.putString("wp2", Base64.getEncoder().encodeToString(temPw.second))
+//        editor.commit()
+        DataManage.wp = str
 
         return str
     }
