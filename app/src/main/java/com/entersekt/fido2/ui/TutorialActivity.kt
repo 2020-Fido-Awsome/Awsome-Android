@@ -13,9 +13,8 @@ class TutorialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
         tutorial_viewpager.adapter = TutorialPagerAdapter(supportFragmentManager)
-        tutorial_viewpager.offscreenPageLimit = 2
+        tutorial_viewpager.offscreenPageLimit = 4
         dots_indicator.setViewPager(tutorial_viewpager)
-
 
     }
 }

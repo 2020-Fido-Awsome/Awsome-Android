@@ -9,7 +9,7 @@ import com.entersekt.fido2.R
 
 
 
-class ThirdFragment : Fragment() {
+class FourthFragment : Fragment() {
     // TODO: Rename and change types of parameters
 
 
@@ -23,7 +23,7 @@ class ThirdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tutorial_third, container, false)
+        return inflater.inflate(R.layout.fragment_tutorial_fourth, container, false)
     }
 
 }

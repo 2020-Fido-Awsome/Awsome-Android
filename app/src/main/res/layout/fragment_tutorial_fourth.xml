@@ -4,5 +4,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tu1"
-    tools:context=".fragment_tutorial.FirstFragment" />
+    android:background="@drawable/tu4"
+    tools:context=".fragment_tutorial.FourthFragment" />
