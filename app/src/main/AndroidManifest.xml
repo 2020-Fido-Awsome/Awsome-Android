@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,18 +32,13 @@
         <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"/>
-        <activity android:name=".ui.AuthnActivity">
-
-        </activity>
+        <activity android:name=".ui.AuthnActivity" />
         <activity android:name=".ui.SignupActivity" />
-        <activity android:name=".ui.ResistActivity" >
-
-        </activity>
+        <activity android:name=".ui.ResistActivity" />
         <activity android:name=".activity_admin.AdminActivity" />
         <activity android:name=".activity_admin.CertifyActivity"/>
         <activity android:name=".ui.SecurityActivity" />
-        <activity android:name=".ui.MainActivity" >
-        </activity>
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.TutorialActivity"/>
     </application>
 </manifest>
