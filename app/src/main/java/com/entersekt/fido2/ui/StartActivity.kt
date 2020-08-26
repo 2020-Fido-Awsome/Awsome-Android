@@ -55,6 +55,7 @@ class StartActivity : AppCompatActivity() {
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
+            finish()
 
             handler.postDelayed(signinRunnable, 10000) //10초
         }
@@ -75,10 +76,11 @@ class StartActivity : AppCompatActivity() {
         }
     }
 
-    val signinRunnable =
+    private val signinRunnable =
         Runnable {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
 }
