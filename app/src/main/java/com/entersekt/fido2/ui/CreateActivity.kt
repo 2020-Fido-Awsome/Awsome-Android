@@ -50,7 +50,7 @@ class CreateActivity : AppCompatActivity() {
                 i.data = Uri.parse(url)
                 startActivity(i)
 
-                handler.postDelayed(signupRunnable, 15000) //15초
+                handler.postDelayed(signupRunnable, 10000) //15초
 
             } else {
                 Toast.makeText(this, "인증실패", Toast.LENGTH_LONG).show()
