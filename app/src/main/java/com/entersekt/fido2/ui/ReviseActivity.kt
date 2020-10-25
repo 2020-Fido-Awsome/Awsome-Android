@@ -19,7 +19,7 @@ import java.util.*
 
 class ReviseActivity : AppCompatActivity() {
 
-    companion object{
+    companion object {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
@@ -44,11 +44,10 @@ class ReviseActivity : AppCompatActivity() {
         }
 
         btn_revise.setOnClickListener {
-            if(txt_newSsid.text.isNullOrBlank() || txt_pwd.text.isNullOrBlank() || txt_repwd.text.isNullOrBlank()){
+            if (txt_newSsid.text.isNullOrBlank() || txt_pwd.text.isNullOrBlank() || txt_repwd.text.isNullOrBlank()) {
                 Toast.makeText(this, "아이디 또는 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                if(txt_pwd.text.toString() == txt_repwd.text.toString()){
+            } else {
+                if (txt_pwd.text.toString() == txt_repwd.text.toString()) {
                     ssid = txt_newSsid.text.toString()
                     pwd = txt_pwd.text.toString()
 
@@ -65,7 +64,6 @@ class ReviseActivity : AppCompatActivity() {
                     // 2줄 추가
 
 
-
                     Connect(ssid, pwd).start()
 
                     val intent = Intent(this, InformationActivity::class.java)
@@ -73,18 +71,18 @@ class ReviseActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
 
-                }else{
+                } else {
                     Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
-    class Connect(ssid: String, pwd: String) :Thread(){
+    class Connect(ssid: String, pwd: String) : Thread() {
         val ssid = ssid
         val pwd = pwd
-        override fun run(){
-            try{
+        override fun run() {
+            try {
                 socket = Socket(ip, port)
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
@@ -93,19 +91,19 @@ class ReviseActivity : AppCompatActivity() {
 
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
-            }catch(e:Exception){    //연결 실패
+            } catch (e: Exception) {    //연결 실패
                 SecurityActivity.socket.close()
             }
 
         }
     }
 
-    class ReviseDisconnect:Thread(){
+    class ReviseDisconnect : Thread() {
         override fun run() {
-            try{
+            try {
                 socket.close()
                 ThreadDeath()
-            }catch(e:Exception){
+            } catch (e: Exception) {
 
             }
         }

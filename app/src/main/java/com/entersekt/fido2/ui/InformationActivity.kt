@@ -21,7 +21,7 @@ import java.util.Base64
 
 class InformationActivity : AppCompatActivity() {
 
-    companion object{
+    companion object {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
@@ -49,18 +49,18 @@ class InformationActivity : AppCompatActivity() {
             finish()
         }
 
-        if(intent.hasExtra("username")){
+        if (intent.hasExtra("username")) {
             txt_User2.text = intent.getStringExtra("username")
         }
 
-        mHandler = object : Handler(Looper.getMainLooper()){  //Thread들로부터 Handler를 통해 메시지를 수신
+        mHandler = object : Handler(Looper.getMainLooper()) {  //Thread들로부터 Handler를 통해 메시지를 수신
             override fun handleMessage(msg: Message) {
                 super.handleMessage(msg)
-                when(msg.what){
-                    0-> txt_User2.text = msg.obj.toString()
-                    1-> act_info_publicIP.text = msg.obj.toString()
-                    2-> act_info_privateIP.text = msg.obj.toString()
-                    3-> act_info_subnet.text = msg.obj.toString()
+                when (msg.what) {
+                    0 -> txt_User2.text = msg.obj.toString()
+                    1 -> act_info_publicIP.text = msg.obj.toString()
+                    2 -> act_info_privateIP.text = msg.obj.toString()
+                    3 -> act_info_subnet.text = msg.obj.toString()
                 }
             }
         }
@@ -71,13 +71,13 @@ class InformationActivity : AppCompatActivity() {
         // Base64.getDecoder().decode(encodedString)
         //var wp1 = sharedPreferences.getString("wp1", DataManage.iniPw1).toByteArray(Charsets.UTF_8)
         //var wp2 = sharedPreferences.getString("wp2", DataManage.iniPw1).toByteArray(Charsets.UTF_8)
-       /*
-        var wp1 = Base64.getDecoder().decode(sharedPreferences.getString("wp1", DataManage.iniPw1))
-        var wp2 = Base64.getDecoder().decode(sharedPreferences.getString("wp2", DataManage.iniPw2))
+        /*
+         var wp1 = Base64.getDecoder().decode(sharedPreferences.getString("wp1", DataManage.iniPw1))
+         var wp2 = Base64.getDecoder().decode(sharedPreferences.getString("wp2", DataManage.iniPw2))
 
-        var wifiPw = AwsomeApp.decryptData(wp1, wp2)
-*/
-        var wifiPw = sharedPreferences.getString("wp","awsfido2020!") // 추가
+         var wifiPw = AwsomeApp.decryptData(wp1, wp2)
+ */
+        var wifiPw = sharedPreferences.getString("wp", "awsfido2020!") // 추가
 
         //var wifiPw = "awsome2020!"
         //println("ssid: $ssid, pw: $wifiPw")
@@ -97,9 +97,9 @@ class InformationActivity : AppCompatActivity() {
     }
 
     //비동기 소켓통신
-    class Connect() :Thread(){
-        override fun run(){
-            try{
+    class Connect() : Thread() {
+        override fun run() {
+            try {
                 Log.e("socket", "정보 소켓 통신 시작")
                 socket = Socket(ip, port)
                 writeSocket = DataOutputStream(socket.getOutputStream())
@@ -114,26 +114,26 @@ class InformationActivity : AppCompatActivity() {
                 var data = String(dataArr).split(',')// 서버에서 보내준 한 줄 전체 - 쓰레기값 지움
                 println("data : ${data}")
 
-                for(i in 0..3){
+                for (i in 0..3) {
                     val msg = mHandler.obtainMessage()
                     msg.what = i
                     msg.obj = data[i]
                     mHandler.sendMessage(msg)
                 }
 
-            }catch(e:Exception){    //연결 실패
+            } catch (e: Exception) {    //연결 실패
                 socket.close()
             }
 
         }
     }
 
-    class InformationDisconnect:Thread(){
+    class InformationDisconnect : Thread() {
         override fun run() {
-            try{
+            try {
                 socket.close()
                 ThreadDeath()
-            }catch(e:Exception){
+            } catch (e: Exception) {
 
             }
         }

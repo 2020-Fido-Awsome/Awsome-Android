@@ -23,9 +23,9 @@ class LogActivity : AppCompatActivity() {
         }
 
         viewpager.adapter = LogAdapter(supportFragmentManager)
-        viewpager.offscreenPageLimit=2
+        viewpager.offscreenPageLimit = 2
 
-        viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+        viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
@@ -43,11 +43,11 @@ class LogActivity : AppCompatActivity() {
 
         btn_switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                viewpager.currentItem=1
+                viewpager.currentItem = 1
                 txt_securitylog.visibility = View.VISIBLE
                 txt_activelog.visibility = View.INVISIBLE
             } else {
-                viewpager.currentItem=0
+                viewpager.currentItem = 0
                 txt_securitylog.visibility = View.INVISIBLE
                 txt_activelog.visibility = View.VISIBLE
             }

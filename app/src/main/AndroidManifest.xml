@@ -39,6 +39,6 @@
         <activity android:name=".activity_admin.CertifyActivity"/>
         <activity android:name=".ui.SecurityActivity" />
         <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.TutorialActivity"/>
+        <activity android:name=".ui.activity_tutorial.TutorialActivity"/>
     </application>
 </manifest>

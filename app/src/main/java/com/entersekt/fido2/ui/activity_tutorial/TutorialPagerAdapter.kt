@@ -1,4 +1,4 @@
-package com.entersekt.fido2.ui
+package com.entersekt.fido2.ui.activity_tutorial
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

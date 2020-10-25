@@ -45,7 +45,8 @@ class SecurityActivity : AppCompatActivity() {
             act_sec_switch_ddos.isChecked = data.split(',')[3] == "on"
             act_sec_switch_dns_spoofing.isChecked = data.split(',')[4] == "on"
             act_sec_switch_command_injection.isChecked = data.split(',')[5] == "on"
-            act_sec_switch_qr.isChecked = data.split(',')[6] == "on"}, 2000)
+            act_sec_switch_qr.isChecked = data.split(',')[6] == "on"
+        }, 2000)
 
 //        StartConnect().start()
 
@@ -66,62 +67,62 @@ class SecurityActivity : AppCompatActivity() {
 //                setStatus()
 //            }
             }
-                act_sec_switch_arp_spoofing.setOnClickListener {
-                        if (act_sec_switch_arp_spoofing.isChecked) {
+            act_sec_switch_arp_spoofing.setOnClickListener {
+                if (act_sec_switch_arp_spoofing.isChecked) {
 //                        Connect(1).start()
-                            connect(1).start()
-                        } else connect(0).start()
-                    }
+                    connect(1).start()
+                } else connect(0).start()
+            }
 
 
 
-                act_sec_switch_syn_flooding.setOnClickListener {
-                        if (act_sec_switch_syn_flooding.isChecked) {
-                            connect(3).start()
-                        } else connect(2).start()
+            act_sec_switch_syn_flooding.setOnClickListener {
+                if (act_sec_switch_syn_flooding.isChecked) {
+                    connect(3).start()
+                } else connect(2).start()
 
+            }
+
+            act_sec_switch_ddos.setOnClickListener {
+                if (act_sec_switch_ddos.isChecked) {
+                    connect(5).start()
+                } else connect(4).start()
+
+            }
+
+            act_sec_switch_dns_spoofing.setOnClickListener {
+                if (act_sec_switch_dns_spoofing.isChecked) {
+                    connect(7).start()
+                } else connect(6).start()
+
+            }
+
+            act_sec_switch_command_injection.setOnClickListener {
+                if (act_sec_switch_command_injection.isChecked) {
+                    connect(9).start()
+                } else connect(8).start()
+
+            }
+
+            act_sec_switch_qr.setOnClickListener {
+                if (act_sec_switch_qr.isChecked) {
+                    connect(11).start()
+                    str = genRandom()
+                    Toast.makeText(
+                        this@SecurityActivity,
+                        "패스워드를 통한 Wifi 연결이 불가능합니다.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    connect(10).start()
+                    Toast.makeText(
+                        this@SecurityActivity,
+                        "Wifi 패스워드를 변경하여 주십시오.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
-                act_sec_switch_ddos.setOnClickListener {
-                        if (act_sec_switch_ddos.isChecked) {
-                            connect(5).start()
-                        } else connect(4).start()
-
-                }
-
-                act_sec_switch_dns_spoofing.setOnClickListener {
-                        if (act_sec_switch_dns_spoofing.isChecked) {
-                            connect(7).start()
-                        } else connect(6).start()
-
-                }
-
-                act_sec_switch_command_injection.setOnClickListener {
-                        if (act_sec_switch_command_injection.isChecked) {
-                            connect(9).start()
-                        } else connect(8).start()
-
-                }
-
-                act_sec_switch_qr.setOnClickListener {
-                        if (act_sec_switch_qr.isChecked) {
-                            connect(11).start()
-                            str = genRandom()
-                            Toast.makeText(
-                                this@SecurityActivity,
-                                "패스워드를 통한 Wifi 연결이 불가능합니다.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            connect(10).start()
-                            Toast.makeText(
-                                this@SecurityActivity,
-                                "Wifi 패스워드를 변경하여 주십시오.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-
-                }
+            }
 
 
 //            val connect = async(Dispatchers.IO) {

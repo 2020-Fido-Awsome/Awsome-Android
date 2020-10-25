@@ -11,7 +11,7 @@ import java.net.Socket
 
 class ResetActivity : AppCompatActivity() {
 
-    companion object{
+    companion object {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
@@ -38,31 +38,33 @@ class ResetActivity : AppCompatActivity() {
         }
     }
 
-    class Connect(i: Int) :Thread(){
+    class Connect(i: Int) : Thread() {
         val con = i
-        override fun run(){
-            try{
+        override fun run() {
+            try {
                 socket = Socket(ip, port)
                 writeSocket = DataOutputStream(socket.getOutputStream())
                 readSocket = DataInputStream(socket.getInputStream())
 
-                msg = if(con == 1){"${DataManage.macAddress}/restart"}else "${DataManage.macAddress}/reset"
+                msg = if (con == 1) {
+                    "${DataManage.macAddress}/restart"
+                } else "${DataManage.macAddress}/reset"
 
                 writeSocket.write(msg.toByteArray())    //메시지 전송 명령 전송
 
-            }catch(e:Exception){    //연결 실패
+            } catch (e: Exception) {    //연결 실패
                 socket.close()
             }
 
         }
     }
 
-    class ResetDisconnect:Thread(){
+    class ResetDisconnect : Thread() {
         override fun run() {
-            try{
+            try {
                 socket.close()
                 ThreadDeath()
-            }catch(e:Exception){
+            } catch (e: Exception) {
 
             }
         }

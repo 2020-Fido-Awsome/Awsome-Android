@@ -46,7 +46,7 @@ class AuthnActivity : AppCompatActivity() {
 
     }
 
-    lateinit var challenge:ByteArray
+    lateinit var challenge: ByteArray
 
 
     var editor = DataManage.pref.edit()
@@ -220,7 +220,8 @@ class AuthnActivity : AppCompatActivity() {
         Log.e(LOG_TAG, "errorCode.name: $errorName")
         Log.e(LOG_TAG, "errorMessage: $errorMessage")
 
-        val registerFidoResult = "An Error Ocurred\n\nError Name:\n$errorName\n\nError Message:\n$errorMessage"
+        val registerFidoResult =
+            "An Error Ocurred\n\nError Name:\n$errorName\n\nError Message:\n$errorMessage"
 
         //원래 코드 : resultText.text = registerFidoResult
 
@@ -376,7 +377,7 @@ class AuthnActivity : AppCompatActivity() {
 
 private fun loadKeyHandle(): ByteArray? {
     //val keyHandleBase64 = DataManage.key_handle
-    val keyHandleBase64 = DataManage.pref.getString("key_handle",null)
+    val keyHandleBase64 = DataManage.pref.getString("key_handle", null)
         ?: return null
     return Base64.decode(keyHandleBase64, Base64.DEFAULT)
 }

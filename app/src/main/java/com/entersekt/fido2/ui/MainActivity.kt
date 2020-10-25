@@ -21,7 +21,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
 
-    companion object{
+    companion object {
         var socket = Socket()
         lateinit var writeSocket: DataOutputStream
         lateinit var readSocket: DataInputStream
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        if(ssid!=""){
+        if (ssid != "") {
             txt_ssid.text = ssid
         }
 
@@ -73,11 +73,11 @@ class MainActivity : AppCompatActivity() {
         DataManage.mac = macAddress
     }
 
-    var lastTimeBackPressed:Long = 0
+    var lastTimeBackPressed: Long = 0
     override fun onBackPressed() {
         if (System.currentTimeMillis() - lastTimeBackPressed >= 2000) {
             lastTimeBackPressed = System.currentTimeMillis()
-            Toast.makeText(this,"버튼을 한번 더 누르면 종료합니다.",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "버튼을 한번 더 누르면 종료합니다.", Toast.LENGTH_SHORT).show()
         } else {
             finish()
         }
@@ -102,9 +102,9 @@ class MainActivity : AppCompatActivity() {
         return ""
     }
 
-    class Connect() :Thread(){
-        override fun run(){
-            try{
+    class Connect() : Thread() {
+        override fun run() {
+            try {
                 Log.e("socket", "홈 소켓 통신 시작")
                 socket = Socket(ip, port)
                 writeSocket = DataOutputStream(socket.getOutputStream())
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 println("name : ${ssid}")
 
 
-            }catch(e:Exception){    //연결 실패
+            } catch (e: Exception) {    //연결 실패
                 socket.close()
             }
 

@@ -75,6 +75,7 @@ class AdminActivity : AppCompatActivity() {
 
             adminAdapter.notifyDataSetChanged()
         }
+
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(rv_admin)
 
@@ -82,9 +83,9 @@ class AdminActivity : AppCompatActivity() {
 
     fun ChangeStatus(position: Int) {
 //데이터 삭제
-        if(position==0){
+        if (position == 0) {
             Toast.makeText(this, "최고 관리자는 삭제할 수 없습니다.", Toast.LENGTH_LONG).show()
-        }else{
+        } else {
             datas.removeAt(position)
             adminAdapter.notifyDataSetChanged()
             Toast.makeText(this, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
@@ -110,7 +111,7 @@ class AdminActivity : AppCompatActivity() {
 
     fun second() {
         println("두번째 함수 실행")
-        for (i in 1 .. cnt) {
+        for (i in 1..cnt) {
             datas.apply {
                 add(
                     AdminData(

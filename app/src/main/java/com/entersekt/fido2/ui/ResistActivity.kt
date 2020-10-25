@@ -12,6 +12,7 @@ import com.entersekt.fido2.appdata.DataManage
 import com.entersekt.fido2.data.ResponseData
 import com.entersekt.fido2.data.SignUpData
 import com.entersekt.fido2.retrofit.ConnectServiceImpl
+import com.entersekt.fido2.ui.activity_tutorial.TutorialActivity
 import com.google.android.gms.fido.Fido
 import com.google.android.gms.fido.fido2.api.common.*
 import com.google.gson.JsonObject
@@ -56,7 +57,6 @@ class ResistActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.e("fiod시시시시시작", "이거되면  액티비티 열리는거" )
         setContentView(R.layout.activity_resist)
         connect()
         //signFido2Button.setOnClickListener { signFido2() }

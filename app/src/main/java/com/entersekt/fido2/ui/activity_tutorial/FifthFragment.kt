@@ -1,6 +1,5 @@
 package com.entersekt.fido2.fragment_tutorial
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,16 +11,11 @@ import com.entersekt.fido2.R
 import com.entersekt.fido2.appdata.DataManage
 import com.entersekt.fido2.data.ResponseData
 import com.entersekt.fido2.ui.MainActivity
-import com.entersekt.fido2.ui.ResistActivity
-import com.entersekt.fido2.ui.TutorialActivity
-import kotlinx.android.synthetic.main.activity_store.*
 import kotlinx.android.synthetic.main.fragment_tutorial_fifth.*
-import kotlinx.android.synthetic.main.fragment_tutorial_third.*
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
 import java.security.MessageDigest
-import java.time.temporal.TemporalUnit
 
 class FifthFragment : Fragment() {
     companion object {

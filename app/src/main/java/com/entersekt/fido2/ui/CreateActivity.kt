@@ -7,9 +7,8 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.entersekt.fido2.R
-import com.entersekt.fido2.appdata.DataManage
+import com.entersekt.fido2.ui.activity_tutorial.TutorialActivity
 import com.google.zxing.integration.android.IntentIntegrator
-import java.security.MessageDigest
 
 
 class CreateActivity : AppCompatActivity() {
@@ -36,7 +35,8 @@ class CreateActivity : AppCompatActivity() {
             IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == "WIFI:S:AWS;T:WPA;P:awsfido2020!;;" || result.contents == "Awsome FIDO Alliance, Good Bye Password!\n" +
-                "Please give first place to AWS team." ) {
+                "Please give first place to AWS team."
+            ) {
                 //Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
                 Toast.makeText(this, "인증성공", Toast.LENGTH_LONG).show()
 //                val intent = Intent(this, ResistActivity::class.java)
@@ -70,5 +70,4 @@ class CreateActivity : AppCompatActivity() {
             val intent = Intent(this, TutorialActivity::class.java);
             startActivity(intent)
         }
-
 }
